@@ -1,0 +1,19 @@
+{
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "jsx": true
+        }
+    },
+    "rules": {
+        "no-console": ["warn"],
+        "no-useless-escape": ["warn"],
+        "no-unused-vars": ["warn"],
+        "indent": ["error", "tab"],
+        "semi": 0,
+        "quotes": ["error", "double"],
+        "eqeqeq": 2,
+        "no-trailing-spaces": 0
+    }
+}

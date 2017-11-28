@@ -25,7 +25,7 @@ const userListController = Object.create(null, {
         value: function (userMovieListArray) {
             userMovieListArray.forEach( movie => {
                 dataManager.getMovieByID(movie.movieId).then(returnedMovieData =>{
-                    render.append("trackedMovies__container", movieFactory(movie, returnedMovieData))
+                    render.append(movieFactory.build(movie, returnedMovieData), "trackedMovies__container")
                 })
             })
         }

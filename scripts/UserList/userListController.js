@@ -1,9 +1,9 @@
 // author: Greg Lawrence
 // purpose: get the user's database of tracked movies from firebase and then gather the details for each movie from api. Then send this data into factory to format into one object, and then render the info to the page.
 
-const dataManager = require("./util/dataManager")
-// const factory = require("./")
-// const render = require("../render/render")
+const dataManager = require("../util/dataManager")
+const movieFactory = require("../util/movieFactory")
+const render = require("../render/render")
 
 const userListController = Object.create(null, {
     "getUserMovieList": {
@@ -15,13 +15,19 @@ const userListController = Object.create(null, {
                         return userDB[key]
                     })
                 return userMovieListArray
-            }).then(
-                userMovieListArray.forEach( movie => {
-                    dataManager.getMovieByID(movie.movieId).then(returnedMovieData =>{
-                        render.all(factory(movie, returnedMovieData))
-                    })
-                })
+            }).then( function (userMovieListArray) {
+                this.getMovieDetails(userMovieListArray)
+            }
             )
+        }
+    },
+    "getMovieDetails": {
+        value: function (userMovieListArray) {
+            userMovieListArray.forEach( movie => {
+                dataManager.getMovieByID(movie.movieId).then(returnedMovieData =>{
+                    render.append("trackedMovies__container", movieFactory(movie, returnedMovieData))
+                })
+            })
         }
     }
 })

@@ -19,33 +19,53 @@ const auth = Object.create(null,{
     "init": {
         value: function () {
             firebase.initializeApp(config)
-
-            // add listener to the login button
-            document.getElementById("comingSoon").addEventListener("click", e => {
-                // Validate login information
-                this.validate(
-                    document.querySelector("[name='emailComingSoon']").value,
-                    document.querySelector("[name='passwordComingSoon']").value
-                )
-                
-                // Clear the form
-                document.querySelector("[name='emailComingSoon']").value = ""
-                document.querySelector("[name='passwordComingSoon']").value = ""
-            })
-
-            // add listener to the logout button
-            document.getElementById("adminLogoutBtn").addEventListener("click", e => {
-                
-                this.logout()
             
-                // display the login form
-              
-                // hide the logout button
-              
+            
+            // add listener to the login/register buttons button
+            document.querySelector(".login").addEventListener("click", e => {
+                console.log(e)
+                if (e.target.className.includes("login__loginBtn")) {
+                    // Validate login information
+                    this.validate(
+                        document.querySelector("[name='login__email']").value,
+                        document.querySelector("[name='login__password']").value
+                    )
+                    
+                    // Clear the form
+                    document.querySelector("[name='login__email']").value = ""
+                    document.querySelector("[name='login__password']").value = ""
+                }
+                
+                if (e.target.className.includes("login__registerBtn")) {
+                // Validate new user information
+                    this.register(
+                        document.querySelector("[name='login__email']").value,
+                        document.querySelector("[name='login__password']").value
+                    )
+                    // Clear the form
+                    document.querySelector("[name='login__email']").value = ""
+                    document.querySelector("[name='login__password']").value = ""
+                }
+            })
+            
+            // add listener to the logout button
+            document.querySelector(".nav__logoutBtn").addEventListener("click", e => {
+                this.logout()
             })
 
             // Set up authentication observer
             observer.init(this)
+        }
+    },
+    "register": {
+        value: function(email, password) {
+            firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+                // Handle Errors here.
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                // ...
+                console.log("error creating account", errorCode, errorMessage)
+            });
         }
     },
     "validate": {

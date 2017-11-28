@@ -1,0 +1,43 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/* this need to stay near the top so that we can override the margin top/bottom later if needed */
+.center {
+    margin: 0 auto;
+    text-align: center;
+}
+
+nav {
+    width: 100%;
+    padding: .3em;
+    display: inline-block;
+    background-color: grey;
+    color: white;
+}
+
+.header {
+    margin: .3em auto;
+    text-align: center;
+}
+
+.login {
+    display: block;
+    /* border for debugging */
+    border: 1px solid orange;
+}
+
+.movieResults {
+    /* border for debugging */
+    border: 1px solid blue;
+}
+
+.trackedMovies {
+    /* border for debugging */
+    border: 1px solid green;
+}
+
+.hidden {
+    display: none;
+}

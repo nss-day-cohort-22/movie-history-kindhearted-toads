@@ -5,14 +5,12 @@ const observer = Object.create(null, {
     "init": {
         value: function (auth) {
             firebase.auth().onAuthStateChanged(function(user) {
-
                
                 if (user) {
+                    // store the current user info to auth object
                     auth.activeUser = user
-                    
-                    // get user token for writing prividges 
-                    //auth.getToken()
-
+                    debugger
+                    document.querySelector(".nav__userDisplay").innerHTML = user.email
                     // show logout button
                     document.querySelector(".nav__logoutBtn").classList.remove("hidden")
                     

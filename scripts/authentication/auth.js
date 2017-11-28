@@ -20,34 +20,52 @@ const auth = Object.create(null,{
         value: function () {
             firebase.initializeApp(config)
             
-            // add listener to the login button
+            
+            // add listener to the login/register buttons button
             document.querySelector(".login").addEventListener("click", e => {
-                // Validate login information
-                this.validate(
-                    document.querySelector("[name='login__email']").value,
-                    document.querySelector("[name='login__password']").value
-                )
+                console.log(e)
+                if (e.target.className.includes("login__loginBtn")) {
+                    // Validate login information
+                    this.validate(
+                        document.querySelector("[name='login__email']").value,
+                        document.querySelector("[name='login__password']").value
+                    )
+                    
+                    // Clear the form
+                    document.querySelector("[name='login__email']").value = ""
+                    document.querySelector("[name='login__password']").value = ""
+                }
                 
-                // Clear the form
-                document.querySelector("[name='login__email']").value = ""
-                document.querySelector("[name='login__password']").value = ""
-
+                if (e.target.className.includes("login__registerBtn")) {
+                // Validate new user information
+                    this.register(
+                        document.querySelector("[name='login__email']").value,
+                        document.querySelector("[name='login__password']").value
+                    )
+                    // Clear the form
+                    document.querySelector("[name='login__email']").value = ""
+                    document.querySelector("[name='login__password']").value = ""
+                }
             })
-
+            
             // add listener to the logout button
             document.querySelector(".nav__logoutBtn").addEventListener("click", e => {
-                
                 this.logout()
-            
-                // display the login form
-                // document.querySelector(".login").classList.remove("hidden")
-                // hide the logout button
-                // document.querySelector(".nav_logoutBtn").classList.add("hidden")
-              
             })
 
             // Set up authentication observer
             observer.init(this)
+        }
+    },
+    "register": {
+        value: function(email, password) {
+            firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+                // Handle Errors here.
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                // ...
+                console.log("error creating account", errorCode, errorMessage)
+            });
         }
     },
     "validate": {

@@ -19,28 +19,30 @@ const auth = Object.create(null,{
     "init": {
         value: function () {
             firebase.initializeApp(config)
-
+            
             // add listener to the login button
-            document.getElementById("comingSoon").addEventListener("click", e => {
+            document.querySelector(".login").addEventListener("click", e => {
                 // Validate login information
                 this.validate(
-                    document.querySelector("[name='emailComingSoon']").value,
-                    document.querySelector("[name='passwordComingSoon']").value
+                    document.querySelector("[name='login__email']").value,
+                    document.querySelector("[name='login__password']").value
                 )
                 
                 // Clear the form
-                document.querySelector("[name='emailComingSoon']").value = ""
-                document.querySelector("[name='passwordComingSoon']").value = ""
+                document.querySelector("[name='login__email']").value = ""
+                document.querySelector("[name='login__password']").value = ""
+
             })
 
             // add listener to the logout button
-            document.getElementById("adminLogoutBtn").addEventListener("click", e => {
+            document.querySelector(".nav__logoutBtn").addEventListener("click", e => {
                 
                 this.logout()
             
                 // display the login form
-              
+                // document.querySelector(".login").classList.remove("hidden")
                 // hide the logout button
+                // document.querySelector(".nav_logoutBtn").classList.add("hidden")
               
             })
 

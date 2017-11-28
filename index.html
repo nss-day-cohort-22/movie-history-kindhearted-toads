@@ -1,25 +1,57 @@
-<!doctype html> 
+<!doctype html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8">
-  <title>Nashville Software School</title>
-  <link rel="stylesheet" href="./styles/styles.css">
+    <meta charset="utf-8">
+    <title>Movie History</title>
+    <link rel="stylesheet" href="./styles/styles.css">
 
 </head>
 
 <body>
-  <nav></nav>
+    <nav class="nav">
+        <input type="text" name="search" placeholder="...search" />
+        <button class="nav__findMovie">Find Movie</button>
+        <button class="nav__searchMyMovies">Search My Movies</button>
+        <!-- Logout button will be hidden by default until user is logged in -->
+        <button class="nav__logout">Logout</button>
+    </nav>
 
-  <header></header>
+    <header class="header">
+        <h1 class="header__text">Movie History</h1>
+    </header>
+    
+    <section class="login center">
+        <form class="login__form">
+            <label>Email:</label>
+            <input type="email" name="login__email" placeholder="...email" />
+            <label>Password:</label>
+            <input type="password" name="login__password" placeholder="...password" />
+        </form>
+        <button class="login__loginBtn">Login</button>
+        <button class="login__registerBtn">Register</button>
+    </section>    <!-- end of login page -->
+    
+    <section class="movieResults center">
+        <p> -- PLACEHOLDER SEARCH RESULTS -- </p>
+    </section>    <!-- end of movieResults page -->
+    
+    <section class="trackedMovies center">
+        <button class="trackedMovies__unwatchedMovies">Unwatched Movies</button>
+        <button class="trackedMovies__watchedMovies">Watched Movies</button>
+        
+        <section "trackedMovies__results">
+           <p> -- TRACKED MOVIES GO HERE -->  </p>
+        </section>
+    </section>    <!-- end of trackedMovies page -->
 
-  <article>
-    <header></header>
-    <section></section>
-    <footer></footer>
-  </article>
+    
 
-  <footer></footer>
 
-  <script src="./build/bundle.js"></script>
+    <footer class="footer"></footer>
+
+
+    <script src="./build/bundle.js"></script>
 </body>
+
 </html>

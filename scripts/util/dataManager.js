@@ -1,8 +1,9 @@
 // Data Handler - Chris Miller
 // Responsible for creating and returning all ajax calls
 
-const $ = require("jQuery")
+const $ = require("jquery")
 const auth = require("../authentication/auth")
+const firebase = require("firebase")
 
 // MovieDB.searchMovie({ query: "Alien" }, (err, res) => {
 //     console.log(res)
@@ -11,11 +12,11 @@ const auth = require("../authentication/auth")
 const dataManager = Object.create(null, {
     "firebaseGET": {
         "value": function () {
-            return firebase.auth().currentUser.getToken(true)
+            return firebase.auth().currentUser.getIdToken(true)
                 .then(idToken => {
                     return $.ajax({
                         "url": `https://movie-history-59344.firebaseio.com/${auth.activeUser.uid}/.json?auth=${idToken}`,
-                        "method": "GET",
+                        "method": "GET"
                     })
                 })
         }, "writable": true, "enumerable": true
@@ -23,11 +24,11 @@ const dataManager = Object.create(null, {
     
     "firebasePOST": {
         "value": function (newObject) {
-            return firebase.auth().currentUser.getToken(true)
+            return firebase.auth().currentUser.getIdToken(true)
                 .then(idToken => {
                     return $.ajax({
                         "url": `https://movie-history-59344.firebaseio.com/${auth.activeUser.uid}/.json?auth=${idToken}`,
-                        "method": "GET",
+                        "method": "POST",
                         "data": JSON.stringify(newObject)
                     })
                 })
@@ -36,24 +37,24 @@ const dataManager = Object.create(null, {
 
     "firebaseDELETE": {
         "value": function (objectID) {
-            return firebase.auth().currentUser.getToken(true)
+            return firebase.auth().currentUser.getIdToken(true)
                 .then(idToken => {
                     return $.ajax({
                         "url": `https://movie-history-59344.firebaseio.com/${auth.activeUser.uid}/${objectID}.json?auth=${idToken}`,
-                        "method": "DELETE",
+                        "method": "DELETE"
                     })
                 })
         }, "writable": true, "enumerable": true
     },
     
     "firebasePUT": {
-        "value": function(editedObject) {
-            return firebase.auth().currentUser.getToken(true)
+        "value": function(fbID, object) {
+            return firebase.auth().currentUser.getIdToken(true)
                 .then(idToken => {
                     return $.ajax({
-                        "url": `https://movie-history-59344.firebaseio.com/${auth.activeUser.uid}/${editedObject.id}.json?auth=${idToken}`,
+                        "url": `https://movie-history-59344.firebaseio.com/${auth.activeUser.uid}/${fbID}/.json?auth=${idToken}`,
                         "method": "PUT",
-                        "data": JSON.stringify(editedObject.value)
+                        "data": JSON.stringify(object)
                     })
                 })
         }, "writable": true, "enumerable": true

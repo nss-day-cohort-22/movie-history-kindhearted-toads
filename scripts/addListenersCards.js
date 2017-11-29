@@ -1,5 +1,6 @@
 const dataManager = require("../util/dataManager");
 const movieFactory = require("../util/movieFactory");
+const renderer = require("../renderer/renderer.js");
 
 $(".cardContainer").on("click", (e) => {
     
@@ -18,11 +19,21 @@ $(".cardContainer").on("click", (e) => {
         }
     }
 
-    // if (elClass.includes("card__watched")) {
-    //     const movieId = parseInt(targetId.split("|")[1]);
-    //     console.log("card__watched - launch modal");
-        
-    // }
+    if (elClass.includes("card__watched")) {
+        const movieId = parseInt(targetId.split("|")[1]);
+        console.log("card__watched - launch modal");
+        //class = modal-content
+    }
+
+    if (elClass.includes("movie-rating___item")) {
+        const rating = parseInt(targetId.split("movie-rating___item")[1]);
+        dataManager.firebasePUT({movidId: 1234, rating: rating}).then(r=> {
+            const userTable = movieFactory.cache;
+            return userTable
+        }).then(result => {
+            dataManager.getMovieById(movieId);
+        });
+    }
 
 
     if (elClass.includes("card__delete-chip")) {

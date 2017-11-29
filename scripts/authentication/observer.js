@@ -1,10 +1,11 @@
 // author: Greg Lawrence
 // purpose: to watch for changes to the active user in firebase and run code based on whether there is a user signed in
-
 const firebase = require("firebase")
 const trackedMoviesController = require("../trackedMovies/trackedMoviesController")
 const addListenersSearch = require("../addListenersSearch")
 const addListenersTrackedMovies = require("../trackedMovies/addListenersTrackedMovies")
+const addListenersCard = require("../addListenersCards");
+
 
 const observer = Object.create(null, {
     "init": {
@@ -31,7 +32,10 @@ const observer = Object.create(null, {
                     trackedMoviesController.getUserMovieList(user.uid)
 
                     addListenersSearch()
+
                     addListenersTrackedMovies()
+
+                    addListenersCard()
                    
                 } else {
                     // clear out welcome message in navbar

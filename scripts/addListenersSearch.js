@@ -15,23 +15,23 @@ const addListenersSearch = function() {
         // get value from search field
         let searchQuery = $("#searchField").val()
         searchQuery = searchQuery.split(" ").join("+");
-        console.log(searchQuery);
         
         // check if the button clicked was Find A Movie
         if (e.target.className.includes("nav__findMovie")) {
 
+            // show the dom element that displays the Find A Movie API Search Results
+            $(".movieResults").removeClass("hidden")
+    
+            // hide the dom element that shows the user their tracked movies
+            $(".trackedMovies").addClass("hidden")
+
+            
             if (searchQuery) {
 
                 // clear out any previous search results 
                 $(".movieResults__cardContainer").html("")
 
-                // show the dom element that displays the Find A Movie API Search Results
-                $(".movieResults").removeClass("hidden")
-        
-                // hide the dom element that shows the user their tracked movies
-                $(".trackedMovies").addClass("hidden")
 
-                
                 // send the search Query to the movie API to look for matches
                 dataManager.searchMovies(searchQuery).then( result=>{
                     result.results.forEach(movie => {
@@ -44,12 +44,11 @@ const addListenersSearch = function() {
                         $(".movieResults__cardContainer").html("<h5>No matches found</h5>")
                     }
                 })
-
                 
             } else {
                 // write code to show the Top 3 or Top 5 movies
+                $(".movieResults__cardContainer").html("<h5>No matches found</h5>")
             }
-
         }
 
         

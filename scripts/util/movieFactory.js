@@ -3,17 +3,25 @@
 // Movie Name, Movie ID, Actors Array, imgPath, overview, fbId, tracked, Rating
 
 const movieFactory = Object.create(null, {
-    "cache": {"value": {}, "writable": true, "enumberable": true},
+    "cache": {"value": [], "writable": true, "enumberable": true},
     
     "build": {
         "value":
-            function (userTable = {"fbId":null,"rating":null}, apiObject) {
+            function (apiObject, userTable = {"fbId":null,"rating":null}) {
 
                 let actorsArray = []
 
-                if(apiObject.hasOwnProperty(credits)){
-                    for (let index = 0; index < 3; index++) {
-                        actorsArray.unshift(apiObject.credits.cast[index])
+                if(apiObject.hasOwnProperty("credits")){
+                    // check the amount of actors on movie, if less than 3 use the amount to display. If more than 3, just display the first 3. 
+                    let amountOfActors = 0
+                    if (apiObject.credits.cast.length > 3) {
+                        amountOfActors = apiObject.credits.cast.length
+                    } else {
+                        amountOfActors = 3
+                    }
+
+                    for (let index = 0; index < amountOfActors; index++) {
+                        actorsArray.unshift(apiObject.credits.cast[index].name)
                     }
                 }
 
@@ -23,6 +31,7 @@ const movieFactory = Object.create(null, {
                     "actorsArray": {"value": actorsArray, "writable": true, "enumberable": true},
                     "imgPath": {"value": apiObject.poster_path, "writable": true, "enumberable": true},
                     "overview": {"value": apiObject.overview, "writable": true, "enumberable": true},
+                    "releaseDate": {"value": apiObject.release_date, "writable": true, "enumberable": true},
                     "fbId": {"value": userTable.fbId, "writable": true, "enumberable": true},
                     "rating": {"value": userTable.rating, "writable": true, "enumberable": true}
                 })

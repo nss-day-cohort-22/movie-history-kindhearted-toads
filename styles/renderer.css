@@ -1,43 +1,73 @@
+.card {
+  min-height: 600px;
+  position: relative;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.movie__title {
+  font-size: 18px !important;
+  font-weight: bold;
+}
+
+.chip {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  z-index: 20;
+  opacity: .80;
+}
+
+.movie__overview {
+  word-wrap: break-word;
+}
 /* -----------------------------------------------------------------------------
   COMPENENTS - RATING
   
 ----------------------------------------------------------------------------- */
 .c-rating {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-  
-  .c-rating__item {
-    -webkit-box-flex: 0;
-    -webkit-flex: 0 0 24px;
-        -ms-flex: 0 0 24px;
-            flex: 0 0 24px;
-    height: 24px;
-    background: url("../images/stars.svg");
-    background-position: 0 0;
-    cursor: pointer;
-    background-repeat: no-repeat;
-  }
-  
-  .c-rating__item--starred {
-    -webkit-box-flex: 0;
-    -webkit-flex: 0 0 24px;
-        -ms-flex: 0 0 24px;
-            flex: 0 0 24px;
-    height: 24px;
-    background: url("../images/stars.svg");
-    background-position: -24px 0;
-    cursor: pointer;
-    background-repeat: no-repeat;
-  }
-  
-  .c-rating__item:hover,
-  .c-rating__item.is-active {
-    background-position: -24px 0;
-  }
-  
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.c-rating__item {
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 24px;
+      -ms-flex: 0 0 24px;
+          flex: 0 0 24px;
+  height: 24px;
+  background: url("../images/stars.svg");
+  background-position: 0 0;
+  background-repeat: no-repeat;
+}
+
+.c-rating__item--starred {
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 24px;
+      -ms-flex: 0 0 24px;
+          flex: 0 0 24px;
+  height: 24px;
+  background: url("../images/stars.svg");
+  background-position: -24px 0;
+  background-repeat: no-repeat;
+}
+
+.b-rating__item:hover,
+.b-rating__item.is-active {
+  background-position: -24px 0;
+}
+
+.card__watched:hover {
+  cursor: pointer !important; 
+}
+
+.card__add-to-watchlist:hover {
+  cursor: pointer !important;
+}

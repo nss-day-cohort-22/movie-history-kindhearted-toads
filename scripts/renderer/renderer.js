@@ -2,24 +2,27 @@ const Renderer = Object.create(null, {
     
     "append": {
         value: function (movie, el) {
-            //for each element in the array
-            //create a new element and append it to the array
+            
+            //capture the element we are going to append to
             let appendToElement = $(`.${el}`);
-    
+            
+            // this is the element we are building
             let cardContainer = document.createElement("div");
             cardContainer.className = "col m4";
     
-            let actionDiv = "";
-            // loop through the data array
-    
             // create the string for the rating
             let rating = movie.rating;
+            
+            // build the list for the ratings
             let ratingString = "";
-            for (let i = 0; i < 5; i++) {
-                if (i < rating) {
-                    ratingString += "<li class='c-rating__item--starred'></li>";
-                } else {
-                    ratingString += "<li class='c-rating__item'></li>";
+            
+            if (rating) {
+                for (let i = 0; i < 5; i++) {
+                    if (i < rating) {
+                        ratingString += "<li class='c-rating__item--starred'></li>";
+                    } else {
+                        ratingString += "<li class='c-rating__item'></li>";
+                    }
                 }
             }
     
@@ -27,7 +30,8 @@ const Renderer = Object.create(null, {
                                             delete
                                             <i class="close material-icons">close</i>
                                         </div>`;
-                // determine what should go below the image
+            let actionDiv = "";
+
             if (movie.rating) {
                 actionDiv = `<div class="card-action" id="movie-action!${movie.id}">
                              <ul class="c-rating">
@@ -46,26 +50,28 @@ const Renderer = Object.create(null, {
                          </div>`;
                 chipDiv = "";
             }
-    
+
+            // capture only the first 30 words
             const overview = movie.overview.substring(0,30);
-            // put the pieces together
+            
             const posterPath = `http://image.tmdb.org/t/p/w150${movie.posterPath}`;
-    
+            
+            // put the pieces together
             cardContainer.innerHTML +=
                     `<div class="card" id="movie!${movie.id}">
-                             <div class="card-image">
-                                <!-- chip -->
-                                ${chipDiv}
-                                <img src="${posterPath}">
-                                <span class="card-title">${movie.name}</span>
-                                </div>
-                                <div class="card-content">
-                                <p>${movie.releaseDate}</p>
-                                <p>${movie.overview}</p>
-                            </div>
-                                ${actionDiv}
-                                </div>`;
+                        <div class="card-image">
+                            ${chipDiv}
+                            <img src="${posterPath}">
+                            <span class="card-title">${movie.name}</span>
+                        </div>
+                            <div class="card-content">
+                            <p>${movie.releaseDate}</p>
+                            <p>${overview}</p>
+                        </div>
+                        ${actionDiv}
+                    </div>`;
     
+            // append the card to the element
             appendToElement.append(cardContainer);
     
         },

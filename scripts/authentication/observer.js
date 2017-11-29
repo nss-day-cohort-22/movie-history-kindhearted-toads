@@ -12,15 +12,19 @@ const observer = Object.create(null, {
                      
                     document.querySelector(".nav__userDisplay").innerHTML = `Welcome ${user.email}!`
                     // show logout button
-                    document.querySelector(".nav__logoutBtn").classList.remove("hidden")
+                    $(".nav__logoutBtn").removeClass("hidden")
                     
                     // hide login form
-                    document.querySelector(".login").classList.add("hidden")
+                    $(".login").addClass("hidden")
                     
                 } else {
                     // hide logout button
-                    document.querySelector(".nav__logoutBtn").classList.add("hidden")
+                    $(".nav__logoutBtn").addClass("hidden")
                     
+                    // display the login form
+                    $(".login").removeClass("hidden")
+
+                    // clear out the active user info on the auth object
                     auth.activeUser = null
                 }
             })

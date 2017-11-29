@@ -19,7 +19,17 @@ const Renderer = Object.create(null, {
         },
         enumerable: true
     },
-    
+
+    "getActors": {
+        value: function(actors) {
+            let listOfActors = "";
+            actors.forEach(a=> {
+                listOfActors += `<li>${a}</li>`;
+            });
+            return listOfActors;
+        },
+        enumerable: true
+    },
     // this function actually generates a new card
     "generateCard": {
         value: function (movie, el) {
@@ -46,6 +56,9 @@ const Renderer = Object.create(null, {
             }
             
             const isWatchlist = movie.fbId !== null && movie.rating !== null;
+
+            let actors = this.getActors(movie.actorsArray);
+
 
             let chipDiv =   `<div class="chip">
                                 delete
@@ -95,6 +108,7 @@ const Renderer = Object.create(null, {
                     <div class="card-reveal">
                         <span class="card-title grey-text text-darken-4">${movie.movieName}<i class="material-icons right" id="additionalDetails|${movie.movieId}">close</i></span>
                         <p class="movie__overview">${overview}</p>
+                        <ul class="movie__actors" id="movie__actors|${movie.movieId}"></ul>
                     </div>
                 </div>
                 `);

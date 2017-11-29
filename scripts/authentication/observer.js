@@ -2,7 +2,7 @@
 // purpose: to watch for changes to the active user in firebase and run code based on whether there is a user signed in
 
 const firebase = require("firebase")
-// const trackedMoviesController = require("../trackedMovies/trackedMoviesController")
+const trackedMoviesController = require("../trackedMovies/trackedMoviesController")
 const addListenersSearch = require("../addListenersSearch")
 
 

@@ -11,7 +11,6 @@ const trackedMoviesController = Object.create(null, {
         value: function (userUID) {
             dataManager.setUID(userUID)
             dataManager.firebaseGET().then(userDB => {
-                debugger
                 userMovieListArray = Object.keys(userDB)
                     .map(key => {
                         userDB[key].fbId = key
@@ -27,13 +26,13 @@ const trackedMoviesController = Object.create(null, {
     "getMovieDetails": {
         value: function (userMovieListArray) {
             userMovieListArray.forEach( movie => {
-                dataManager.getMovieByID(movie.movieId).then(returnedMovieData =>{
-                    renderer.append(movieFactory.build(movie, returnedMovieData), "trackedMovies__container")
+                dataManager.getMovieById(movie.movieId).then(returnedMovieData =>{
+                    renderer.append(movieFactory.build(returnedMovieData, movie), "trackedMovies__cardContainer")
                 })
             })
         }
     }
 })
 
-
+//
 module.exports = trackedMoviesController

@@ -12,7 +12,15 @@ const movieFactory = Object.create(null, {
                 let actorsArray = []
 
                 if(apiObject.hasOwnProperty("credits")){
-                    for (let index = 0; index < 3; index++) {
+                    // check the amount of actors on movie, if less than 3 use the amount to display. If more than 3, just display the first 3. 
+                    let amountOfActors = 0
+                    if (apiObject.credits.cast.length > 3) {
+                        amountOfActors = apiObject.credits.cast.length
+                    } else {
+                        amountOfActors = 3
+                    }
+
+                    for (let index = 0; index < amountOfActors; index++) {
                         actorsArray.unshift(apiObject.credits.cast[index].name)
                     }
                 }

@@ -10,20 +10,23 @@ const Renderer = Object.create(null, {
     },
     
     "trackedToWatched": {
-        value: function (elementId) {
-    
+        value: function (movie, el) {
+            // update object
+            // movie.watched = true;
+            const newCard = this.generateCard(movie, el);
+            const existingCard = $(`#card${movie.movieId}`);
+            existingCard.replaceWith(newCard);
         },
         enumerable: true
     },
-    
+
     // this function actually generates a new card
     "generateCard": {
         value: function (movie, el) {
             
-            
-            
             let $cardContainer = $("<div>", {
-                "class": `col m4 card${movie.id}`
+                "class": "col m4 card__wrapper hoverable",
+                "id": `card${movie.movieId}`
             });
     
             // create the string for the rating
@@ -45,118 +48,78 @@ const Renderer = Object.create(null, {
 
             let chipDiv =   `<div class="chip">
                                 delete
-                                <i class="close material-icons card__delete-chip" id="chip|${movie.id}">close</i>
+                                <i class="close material-icons card__delete-chip" id="chip|${movie.movieId}">close</i>
                             </div>`;
 
             let actionDiv = "";
 
             if (movie.rating) {
-                actionDiv = `<div class="card-action" id="movieAction|${movie.id}">
+                actionDiv = `<div class="card-action" id="movieAction|${movie.movieId}">
                              <ul class="c-rating">
                                  ${ratingString}
                              </ul>
                          </div>`;
                     
-            } else if (movie.watchlist) {
-                actionDiv = `<div class="card-action" id="movieaction|${movie.id}">
-                         <a class="card__watched" id="watched|${movie.id}">Watched?</a>
+            } else if (movie.fbId) {
+                actionDiv = `<div class="card-action" id="movieaction|${movie.movieId}">
+                         <a class="card__watched" id="watched|${movie.movieId}">Watched?</a>
                          </div>`;
                     
             } else {
                 actionDiv = `<div class="card-action">
-                         <a class="card__add-to-watchlist" id="addToWatchlist|${movie.id}">Add To Watchlist</a>
+                         <a class="card__add-to-watchlist" id="addToWatchlist|${movie.movieId}">Add To Watchlist</a>
                          </div>`;
                 chipDiv = "";
             }
 
             // capture only the first 30 words
-            const overview = movie.overview.substring(0,30);
+            const overview = movie.overview.length > 300 ? movie.overview.substring(0,300) : movie.overview;
             
-            const posterPath = `http://image.tmdb.org/t/p/w300${movie.posterPath}`;
+            const posterPath = `http://image.tmdb.org/t/p/w342${movie.imgPath}`;
             
             // put the pieces together
             $cardContainer.html(
                 `<div class="card sticky-action">
-                        <div class="card-image">
-                        <img class="activiator" src="${posterPath}">
-                        </div>
-                        <div class="card-content">
-                        <span class="movie__title card-title activator grey-text text-darken-4">${movie.name}<i class="material-icons right">more_vert</i></span>
-                        <p>${movie.releaseDate}</p>
-                        <p>${overview}</p>
-                        </div>
+                    <div class="card-image">
+                    <img class="activiator" src="${posterPath}">
+                    </div>
+                    <div class="card-content">
+                    <span class="movie__title card-title activator grey-text text-darken-4">${movie.movieName}<i class="material-icons right">more_vert</i></span>
+                    <p>${movie.releaseDate}</p>
+                    </div>
                         ${actionDiv}
                         ${chipDiv}
-                <div class="card-reveal">
-                    <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
-                    <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                    <div class="card-reveal">
+                        <span class="card-title grey-text text-darken-4">${movie.movieName}<i class="material-icons right">close</i></span>
+                        <p class="movie__overview">${overview}</p>
+                    </div>
                 </div>
                 `);
 
-            return $cardContainer
+            // Add Event Listeners to the Card
 
+            return this.AddEventListener($cardContainer);
+
+        },
+        enumerable: true
+    },
+    "AddEventListener": {
+        value: function(card) {
+            // card.on("click", function(e) {
+            //     const el = e.target;
+
+            //     if (el.className.includes("card__delete-chip")) {
+            //         const targetId = el.id;
+            //         const movieId = parseInt(targetId.split('|')[1]);
+            //         $(`.card${movieId}`).hide();
+            //     }
+
+            // });
+            return card;
         },
         enumerable: true
     }
 
 });
 
-
-module.exports = Renderer;
-
-//Test Data
-// const data = [{
-//     "name": "Bourne Identify",
-//     "releaseDate": "2001-12-01",
-//     "actors": null,
-//     "id": 2501,
-//     "watchlist": false,
-//     "watched": false,
-//     "rating": null,
-//     "posterPath": "/bXQIL36VQdzJ69lcjQR1WQzJqQR.jpg",
-//     "overview": "In a world..."
-// },
-// {
-//     "name": "Bourne Identify",
-//     "releaseDate": "2001-12-01",
-//     "actors": null,
-//     "id": 2501,
-//     "watchlist": true,
-//     "watched": false,
-//     "rating": null, 
-//     "posterPath": "/bXQIL36VQdzJ69lcjQR1WQzJqQR.jpg",
-//     "overview": "In a world..."
-// },
-// {
-//     "name": "Bourne Identify",
-//     "releaseDate": "2001-12-01",
-//     "actors": null,
-//     "id": 2501,
-//     "watchlist": true,
-//     "watched": true,
-//     "rating": 2,
-//     "posterPath": "/bXQIL36VQdzJ69lcjQR1WQzJqQR.jpg",
-//     "overview": "In a world..."
-// },
-// {
-//     "name": "Bourne Identify",
-//     "releaseDate": "2001-12-01",
-//     "actors": null,
-//     "id": 2501,
-//     "watchlist": true,
-//     "watched": true,
-//     "rating": 3,
-//     "posterPath": "/bXQIL36VQdzJ69lcjQR1WQzJqQR.jpg",
-//     "overview": "In a world..."
-// },
-// {
-//     "name": "Bourne Identify",
-//     "releaseDate": "2001-12-01",
-//     "actors": null,
-//     "id": 2501,
-//     "watchlist": true,
-//     "watched": true,
-//     "rating": 5,
-//     "posterPath": "/bXQIL36VQdzJ69lcjQR1WQzJqQR.jpg",
-//     "overview": "In a world..."
-// }];
+module.requires = Renderer;

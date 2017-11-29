@@ -23,6 +23,9 @@ const observer = Object.create(null, {
                     // hide login form
                     $(".login").addClass("hidden")
 
+                    // show searchbar
+                    $(".search").removeClass("hidden")
+
                     // get active users tracked movie list
                     trackedMoviesController.getUserMovieList(user.uid)
 
@@ -32,6 +35,9 @@ const observer = Object.create(null, {
                 } else {
                     // hide logout button
                     $(".nav__logoutBtn").addClass("hidden")
+                    
+                    // hide searchbar
+                    $(".search").addClass("hidden")
                     
                     // display the login form
                     $(".login").removeClass("hidden")

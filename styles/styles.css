@@ -29,9 +29,31 @@ body {
 
 .login {
     display: block;
+    width: 50%;
     /* border for debugging */
-    /* border: 1px solid orange; */
+    border: 1px solid #f66b74;
+    /* border-bottom-left-radius: 16px; */
+    /* border-bottom-right-radius: 16px; */
+    border-radius: 16px;
+    padding: .5em;
 }
+
+.login__header {
+    padding: .2em;
+    margin: -.5em;
+    margin-bottom: .5em;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    background-color: #f66b74;
+    color: white;
+}
+
+.login__header h4 {
+    margin-top: .2em;
+    margin-bottom: .2em;
+}
+
+
 
 .movieResults {
     /* border for debugging */

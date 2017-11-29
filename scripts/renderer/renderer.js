@@ -2,13 +2,29 @@ const Renderer = Object.create(null, {
     
     "append": {
         value: function (movie, el) {
-            
             //capture the element we are going to append to
             let appendToElement = $(`.${el}`);
+            appendToElement.append(this.generateCard(movie, el));
+        },
+        enumerable: true
+    },
+    
+    "trackedToWatched": {
+        value: function (elementId) {
+    
+        },
+        enumerable: true
+    },
+    
+    // this function actually generates a new card
+    "generateCard": {
+        value: function (movie, el) {
             
-            // this is the element we are building
-            let cardContainer = document.createElement("div");
-            cardContainer.className = "col m4";
+            
+            
+            let $cardContainer = $("<div>", {
+                "class": `col m4 card${movie.id}`
+            });
     
             // create the string for the rating
             let rating = movie.rating;
@@ -25,28 +41,30 @@ const Renderer = Object.create(null, {
                     }
                 }
             }
-    
+            
+
             let chipDiv =   `<div class="chip">
-                                            delete
-                                            <i class="close material-icons">close</i>
-                                        </div>`;
+                                delete
+                                <i class="close material-icons card__delete-chip" id="chip|${movie.id}">close</i>
+                            </div>`;
+
             let actionDiv = "";
 
             if (movie.rating) {
-                actionDiv = `<div class="card-action" id="movie-action!${movie.id}">
+                actionDiv = `<div class="card-action" id="movieAction|${movie.id}">
                              <ul class="c-rating">
                                  ${ratingString}
                              </ul>
                          </div>`;
                     
             } else if (movie.watchlist) {
-                actionDiv = `<div class="card-action" id="movie-action!${movie.id}">
-                         <a href="#">Watched?</a>
+                actionDiv = `<div class="card-action" id="movieaction|${movie.id}">
+                         <a class="card__watched" id="watched|${movie.id}">Watched?</a>
                          </div>`;
                     
             } else {
-                actionDiv = `<div class="card-action" id="movie-action!${movie.id}">
-                         <a href="#">Add To Watchlist</a>
+                actionDiv = `<div class="card-action">
+                         <a class="card__add-to-watchlist" id="addToWatchlist|${movie.id}">Add To Watchlist</a>
                          </div>`;
                 chipDiv = "";
             }
@@ -54,37 +72,35 @@ const Renderer = Object.create(null, {
             // capture only the first 30 words
             const overview = movie.overview.substring(0,30);
             
-            const posterPath = `http://image.tmdb.org/t/p/w150${movie.posterPath}`;
+            const posterPath = `http://image.tmdb.org/t/p/w300${movie.posterPath}`;
             
             // put the pieces together
-            cardContainer.innerHTML +=
-                    `<div class="card" id="movie!${movie.id}">
+            $cardContainer.html(
+                `<div class="card sticky-action">
                         <div class="card-image">
-                            ${chipDiv}
-                            <img src="${posterPath}">
-                            <span class="card-title">${movie.name}</span>
+                        <img class="activiator" src="${posterPath}">
                         </div>
-                            <div class="card-content">
-                            <p>${movie.releaseDate}</p>
-                            <p>${overview}</p>
+                        <div class="card-content">
+                        <span class="movie__title card-title activator grey-text text-darken-4">${movie.name}<i class="material-icons right">more_vert</i></span>
+                        <p>${movie.releaseDate}</p>
+                        <p>${overview}</p>
                         </div>
                         ${actionDiv}
-                    </div>`;
-    
-            // append the card to the element
-            appendToElement.append(cardContainer);
-    
-        },
-        enumerable: true
-    },
-    
-    "trackedToWatched": {
-        value: function (elementId) {
-    
+                        ${chipDiv}
+                <div class="card-reveal">
+                    <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
+                    <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                </div>
+                `);
+
+            return $cardContainer
+
         },
         enumerable: true
     }
+
 });
+
 
 module.exports = Renderer;
 

@@ -30,17 +30,17 @@ body {
 .login {
     display: block;
     /* border for debugging */
-    border: 1px solid orange;
+    /* border: 1px solid orange; */
 }
 
 .movieResults {
     /* border for debugging */
-    border: 1px solid blue;
+    /* border: 1px solid blue; */
 }
 
 .trackedMovies {
     /* border for debugging */
-    border: 1px solid green;
+    /* border: 1px solid green; */
 }
 
 .hidden {

@@ -28,6 +28,10 @@ addListenersCards = () => {
             }
         }
 
+        if (targetId.includes("additionalDetails")) {
+            console.log("opened additional details");
+        }
+
         if (elClass.includes("card__watched")) {
             const movieId = parseInt(targetId.split("|")[1]);
             console.log("card__watched - launch modal");

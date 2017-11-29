@@ -71,3 +71,7 @@
 .card__add-to-watchlist:hover {
   cursor: pointer !important;
 }
+
+.r-flex {
+  display: flex;
+}

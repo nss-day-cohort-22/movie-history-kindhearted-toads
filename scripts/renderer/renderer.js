@@ -19,10 +19,10 @@ const Renderer = Object.create(null, {
         },
         enumerable: true
     },
+    
     // this function actually generates a new card
     "generateCard": {
         value: function (movie, el) {
-            console.log(movie);
 
             let $cardContainer = $("<div>", {
                 "class": "col m4 card__wrapper hoverable",

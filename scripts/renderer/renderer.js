@@ -80,7 +80,7 @@ const Renderer = Object.create(null, {
             } else if (isWatchlist) {
                 $cardContainer.addClass("unwatched");
                 actionDiv = `<div class="card-action" id="movieaction|${movie.movieId}">
-                         <a href="#rating__modal" class="card__watched modal-trigger" id="watched|${movie.movieId}">Watched?</a>
+                         <a id="watched|${movie.movieId}" class="card__watched waves-effect waves-light btn modal-trigger" href="#rating__modal">Watched?</a>
                          </div>`;
                     
             } else {

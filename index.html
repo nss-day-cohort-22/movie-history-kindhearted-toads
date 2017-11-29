@@ -6,7 +6,8 @@
     <title>Movie History</title>
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <link rel="stylesheet" href="./node_modules/materialize-css/dist/css/materialize.css">
+    <link rel="stylesheet" href="./styles/renderer.css">
     <link rel="stylesheet" href="./styles/styles.css">
 
 </head>
@@ -63,12 +64,24 @@
             <p> -- TRACKED MOVIES GO HERE -->  </p>
             </section>
         </section>    <!-- end of trackedMovies page -->
-          
+        <div id="rating__modal" class="modal">
+            <div class="modal-content">
+              <h1>RATE THIS MOVIE!</h>
+                <ul class="movie-rating">
+                    <li class='movie-rating__item1'></li>
+                    <li class='movie-rating__item2'></li>
+                    <li class='movie-rating__item3'></li>
+                    <li class='movie-rating__item4'></li>
+                    <li class='movie-rating__item5'></li>
+                </ul>
+            </div>
+            <div class="modal-footer">
+              <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Confirm</a>
+            </div>
+          </div>   <!-- end of movie rating modal page -->
     </div>
     <footer class="footer"></footer>
 
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
     <script src="./build/bundle.js"></script>
 </body>
 

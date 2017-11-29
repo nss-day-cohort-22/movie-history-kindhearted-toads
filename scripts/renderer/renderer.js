@@ -23,9 +23,11 @@ const Renderer = Object.create(null, {
     "getActors": {
         value: function(actors) {
             let listOfActors = "";
-            actors.forEach(a=> {
-                listOfActors += `<li>${a}</li>`;
-            });
+            if (actors) {
+                actors.forEach(a=> {
+                    listOfActors += `<li>${a}</li>`;
+                });
+            }
             return listOfActors;
         },
         enumerable: true

@@ -10,12 +10,16 @@ const firebase = require("firebase")
 // });
 
 const dataManager = Object.create(null, {
+    "userUID": {"value": null, "writable": true, "enumberable": true},
+
+    "setUID": {"value": function(uid){this.userUID = uid}, "writable": true, "enumerable": true},
+    
     "firebaseGET": {
         "value": function () {
             return firebase.auth().currentUser.getIdToken(true)
                 .then(idToken => {
                     return $.ajax({
-                        "url": `https://movie-history-59344.firebaseio.com/${auth.activeUser.uid}/.json?auth=${idToken}`,
+                        "url": `https://movie-history-59344.firebaseio.com/${this.userUID}/.json?auth=${idToken}`,
                         "method": "GET"
                     })
                 })
@@ -23,13 +27,13 @@ const dataManager = Object.create(null, {
     },
     
     "firebasePOST": {
-        "value": function (newObject) {
+        "value": function (id) {
             return firebase.auth().currentUser.getIdToken(true)
                 .then(idToken => {
                     return $.ajax({
-                        "url": `https://movie-history-59344.firebaseio.com/${auth.activeUser.uid}/.json?auth=${idToken}`,
+                        "url": `https://movie-history-59344.firebaseio.com/${this.userUID}/.json?auth=${idToken}`,
                         "method": "POST",
-                        "data": JSON.stringify(newObject)
+                        "data": JSON.stringify({"movieId": id, "rating":0})
                     })
                 })
         }, "writable": true, "enumerable": true
@@ -40,7 +44,7 @@ const dataManager = Object.create(null, {
             return firebase.auth().currentUser.getIdToken(true)
                 .then(idToken => {
                     return $.ajax({
-                        "url": `https://movie-history-59344.firebaseio.com/${auth.activeUser.uid}/${objectID}.json?auth=${idToken}`,
+                        "url": `https://movie-history-59344.firebaseio.com/${this.userUID}/${objectID}.json?auth=${idToken}`,
                         "method": "DELETE"
                     })
                 })
@@ -52,7 +56,7 @@ const dataManager = Object.create(null, {
             return firebase.auth().currentUser.getIdToken(true)
                 .then(idToken => {
                     return $.ajax({
-                        "url": `https://movie-history-59344.firebaseio.com/${auth.activeUser.uid}/${fbID}/.json?auth=${idToken}`,
+                        "url": `https://movie-history-59344.firebaseio.com/${this.userUID}/${fbID}/.json?auth=${idToken}`,
                         "method": "PUT",
                         "data": JSON.stringify(object)
                     })

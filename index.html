@@ -10,9 +10,11 @@
 
 <body>
     <nav class="nav">
-        <input type="text" name="search" placeholder="...search" />
-        <button class="nav__findMovie">Find Movie</button>
-        <button class="nav__searchMyMovies">Search My Movies</button>
+        <section class="nav__search">
+            <input type="text" name="search" placeholder="...search" />
+            <button class="nav__findMovie">Find A Movie</button>
+            <button class="nav__searchMyMovies">Search My Movies</button>
+        </section>
         <span class="nav__userDisplay"></span>
         <!-- Logout button will be hidden by default until user is logged in -->
         <button class="nav__logoutBtn hidden">Logout</button>
@@ -33,18 +35,25 @@
         <button class="login__registerBtn">Register</button>
     </section>    <!-- end of login page -->
     
-    <section class="movieResults center">
-        <header class="movieResults__header center">
+    <section class="movieSearch center">
+        <header class="movieSearch__header center">
+
         </header>
-        <p> -- PLACEHOLDER SEARCH RESULTS -- </p>
+        <section class="movieSearch__results row">
+            <section class="movieSearch__container col s12 cards-container">
+                <p> -- PLACEHOLDER SEARCH RESULTS -- </p>
+            </section>
+        </section>
     </section>    <!-- end of movieResults page -->
     
     <section class="trackedMovies center">
         <button class="trackedMovies__unwatchedMovies">Unwatched Movies</button>
         <button class="trackedMovies__watchedMovies">Watched Movies</button>
         
-        <section "trackedMovies__results">
-           <p> -- TRACKED MOVIES GO HERE -->  </p>
+        <section "trackedMovies__results row">
+            <section class="trackedMovies__container col s12 cards-container">
+                <p> -- TRACKED MOVIES GO HERE -->  </p>
+            </section>
         </section>
     </section>    <!-- end of trackedMovies page -->
 

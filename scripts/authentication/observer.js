@@ -9,8 +9,8 @@ const observer = Object.create(null, {
                 if (user) {
                     // store the current user info to auth object
                     auth.activeUser = user
-                    debugger
-                    document.querySelector(".nav__userDisplay").innerHTML = user.email
+                     
+                    document.querySelector(".nav__userDisplay").innerHTML = `Welcome ${user.email}!`
                     // show logout button
                     document.querySelector(".nav__logoutBtn").classList.remove("hidden")
                     

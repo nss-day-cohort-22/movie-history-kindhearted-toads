@@ -4,7 +4,10 @@
 
 const movieFactory = Object.create(null, {
     "cache": {"value": [], "writable": true, "enumberable": true},
-    
+    "removeFromCache": {value: function(movieId){
+        this.cache.splice(this.cache.indexOf(this.cache.find(f=> f.movieId === movieId)));
+    }
+    },
     "build": {
         "value":
             function (apiObject, userTable = {"fbId":null,"rating":null}) {

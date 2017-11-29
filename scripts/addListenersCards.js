@@ -13,7 +13,7 @@ addListenersCards = () => {
         if (elClass.includes("card__add-to-watchlist")) {
             const movieId = parseInt(targetId.split("|")[1]);
             // check if this movie exists already
-            if (movieFactory.cache.find(r=> r.id === movieId)) {
+            if (movieFactory.cache.find(r=> r.movieId === movieId)) {
                 console.log("already on the watchlist");
             } else {
                 dataManager.firebasePOST(movieId).then((results) => {
@@ -29,14 +29,18 @@ addListenersCards = () => {
         }
 
         if (targetId.includes("additionalDetails")) {
+            const movieId = parseInt(targetId.split("|")[1]);
+            const actorsEl = document.querySelector(`#movie__actors|${movie.movieId}`);
             console.log("opened additional details");
+            if (actorsEl.firstChild) {
+                console.log("already has an actor set");
+            }
         }
 
-        if (elClass.includes("card__watched")) {
-            const movieId = parseInt(targetId.split("|")[1]);
-            console.log("card__watched - launch modal");
-        //class = modal-content
-        }
+        // if (elClass.includes("card__watched")) {
+        //     console.log("card__watched - launch modal");
+        // //class = modal-content
+        // }
 
         if (elClass.includes("movie-rating___item")) {
             const rating = parseInt(targetId.split("movie-rating___item")[1]);

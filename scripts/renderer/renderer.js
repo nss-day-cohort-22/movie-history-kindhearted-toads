@@ -22,7 +22,8 @@ const Renderer = Object.create(null, {
     // this function actually generates a new card
     "generateCard": {
         value: function (movie, el) {
-            
+            console.log(movie);
+
             let $cardContainer = $("<div>", {
                 "class": "col m4 card__wrapper hoverable",
                 "id": `card${movie.movieId}`
@@ -34,7 +35,7 @@ const Renderer = Object.create(null, {
             // build the list for the ratings
             let ratingString = "";
             
-            if (rating !== 0) {
+            if (rating > 0) {
                 for (let i = 0; i < 5; i++) {
                     if (i < rating) {
                         ratingString += "<li class='c-rating__item--starred'></li>";
@@ -44,6 +45,8 @@ const Renderer = Object.create(null, {
                 }
             }
             
+            const isWatchlist = movie.fbId !== null && movie.rating !== null;
+
             let chipDiv =   `<div class="chip">
                                 delete
                                 <i class="close material-icons card__delete-chip" id="chip|${movie.fbId}@${movie.movieId}">close</i>
@@ -51,7 +54,7 @@ const Renderer = Object.create(null, {
 
             let actionDiv = "";
 
-            if (movie.rating !== 0) {
+            if (movie.rating > 0 && isWatchlist) {
                 $cardContainer.addClass("watched");
                 actionDiv = `<div class="card-action" id="movieAction|${movie.movieId}">
                              <ul class="c-rating">
@@ -59,7 +62,7 @@ const Renderer = Object.create(null, {
                              </ul>
                          </div>`;
                     
-            } else if (movie.fbId) {
+            } else if (isWatchlist) {
                 $cardContainer.addClass("unwatched");
                 actionDiv = `<div class="card-action" id="movieaction|${movie.movieId}">
                          <a href="#rating__modal" class="card__watched modal-trigger" id="watched|${movie.movieId}">Watched?</a>

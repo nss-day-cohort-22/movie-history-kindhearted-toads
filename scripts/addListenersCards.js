@@ -1,6 +1,7 @@
 const dataManager = require("./util/dataManager");
 const movieFactory = require("./util/movieFactory");
 const renderer = require("./renderer/renderer.js");
+const trackedMoviesController = require("./trackedMovies/trackedMoviesController");
 
 addListenersCards = () => {
 
@@ -9,13 +10,19 @@ addListenersCards = () => {
         const elClass = e.target.className;
         const targetId = e.target.id;
     
-        if (elClass.includes("card__add-to_watchlist")) {
+        if (elClass.includes("card__add-to-watchlist")) {
             const movieId = parseInt(targetId.split("|")[1]);
             // check if this movie exists already
             if (movieFactory.cache.find(r=> r.id === movieId)) {
                 console.log("already on the watchlist");
             } else {
-                firebasePOST(movieId).then(() => {
+                dataManager.firebasePOST(movieId).then((results) => {
+                    const movieObj = {
+                        "movieId": movieId,
+                        "fbId": results.name,
+                        "rating": 0
+                    }
+                    trackedMoviesController.getMovieDetails([movieObj]);
                     $(`#card${movieId}`).remove();
                 });
             }

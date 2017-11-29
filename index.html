@@ -4,65 +4,71 @@
 <head>
     <meta charset="utf-8">
     <title>Movie History</title>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
     <link rel="stylesheet" href="./styles/styles.css">
 
 </head>
 
 <body>
     <nav class="nav">
-        <section class="nav__search">
-            <input type="text" name="search" placeholder="...search" />
-            <button class="nav__findMovie">Find A Movie</button>
-            <button class="nav__searchMyMovies">Search My Movies</button>
-        </section>
-        <span class="nav__userDisplay"></span>
-        <!-- Logout button will be hidden by default until user is logged in -->
-        <button class="nav__logoutBtn hidden">Logout</button>
-    </nav>
 
-    <header class="header">
-        <h1 class="header__text">Movie History</h1>
-    </header>
-    
-    <section class="login center">
-        <form class="login__form">
-            <label>Email:</label>
-            <input type="email" name="login__email" placeholder="...email" />
-            <label>Password:</label>
-            <input type="password" name="login__password" placeholder="...password" />
-        </form>
-        <button class="login__loginBtn">Login</button>
-        <button class="login__registerBtn">Register</button>
-    </section>    <!-- end of login page -->
-    
-    <section class="movieSearch center">
-        <header class="movieSearch__header center">
-
+            <span class="nav__userDisplay col s6"></span>
+            <!-- Logout button will be hidden by default until user is logged in -->
+            <div class=" right col s6">
+                <button class="nav__logoutBtn hidden btn waves-effect waves-light white black-text">Logout</button>
+            </div>
+        </nav>
+        <div class="siteContent container">
+            <div class="row">
+                <div class="search input-field col s7">
+                    <input type="text" name="search" id="searchField" />
+                    <label for="searchField">Search</label>
+                </div>
+                <div class="search__buttons col s5 valign-wrapper"></div>        
+                <button class="nav__findMovie btn waves-effect waves-light">Find A Movie</button>
+                <button class="nav__searchMyMovies btn waves-effect waves-light">Search My Movies</button>
+            </div>
+        <header class="header">
+            <h1 class="header__text center-align">Movie History</h1>
         </header>
-        <section class="movieSearch__results row">
-            <section class="movieSearch__container col s12 cards-container">
-                <p> -- PLACEHOLDER SEARCH RESULTS -- </p>
-            </section>
-        </section>
-    </section>    <!-- end of movieResults page -->
-    
-    <section class="trackedMovies center">
-        <button class="trackedMovies__unwatchedMovies">Unwatched Movies</button>
-        <button class="trackedMovies__watchedMovies">Watched Movies</button>
         
-        <section "trackedMovies__results row">
-            <section class="trackedMovies__container col s12 cards-container">
-                <p> -- TRACKED MOVIES GO HERE -->  </p>
+        <section class="login">
+            <form class="login__form">
+                <div class="input-field">
+                    <input type="email" name="login__email" id="email" class="validate" />
+                    <label for="email">Email</label>
+                </div>
+                <div class="input-field">
+                    <input type="password" name="login__password" id="password" class="validate" />
+                    <label for="password">Password</label>
+                </div>
+            </form>
+            <button class="login__loginBtn btn waves-effect waves-light">Login</button>
+            <button class="login__registerBtn btn waves-effect waves-light red">Register</button>
+        </section>    <!-- end of login page -->
+        
+        <section class="movieResults center-align">
+            <header class="movieResults__header center-align ">
+            </header>
+            <p> -- PLACEHOLDER SEARCH RESULTS -- </p>
+        </section>    <!-- end of movieResults page -->
+        
+        <section class="trackedMovies center-align">
+            <button class="trackedMovies__unwatchedMovies btn waves-effect waves-light">Unwatched Movies</button>
+            <button class="trackedMovies__watchedMovies btn waves-effect waves-light">Watched Movies</button>
+            
+            <section "trackedMovies__results">
+            <p> -- TRACKED MOVIES GO HERE -->  </p>
             </section>
-        </section>
-    </section>    <!-- end of trackedMovies page -->
-
-    
-
-
+        </section>    <!-- end of trackedMovies page -->
+          
+    </div>
     <footer class="footer"></footer>
 
-
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
     <script src="./build/bundle.js"></script>
 </body>
 

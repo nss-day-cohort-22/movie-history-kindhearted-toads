@@ -9,12 +9,17 @@ body {
     text-align: center;
 }
 
-nav {
+.nav {
     width: 100%;
-    padding: .3em;
-    display: inline-block;
-    background-color: grey;
-    color: white;
+    padding-left: .5em;
+    padding-right: .5em;
+    /* display: inline-block; */
+    /* background-color: grey; */
+    /* color: white; */
+}
+
+.nav__userDisplay {
+    font-size: 1.2em;
 }
 
 .header {

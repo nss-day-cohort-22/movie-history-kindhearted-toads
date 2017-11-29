@@ -14,22 +14,27 @@ const observer = Object.create(null, {
                 if (user) {
                     // store the current user info to auth object
                     auth.activeUser = user
-                    
-                    // display active user email in navbar
-                    document.querySelector(".nav__userDisplay").innerHTML = user.email
+                     
+                    document.querySelector(".nav__userDisplay").innerHTML = `Welcome ${user.email}!`
+
                     // show logout button
-                    document.querySelector(".nav__logoutBtn").classList.remove("hidden")
+                    $(".nav__logoutBtn").removeClass("hidden")
                     
                     // hide login form
-                    document.querySelector(".login").classList.add("hidden")
+                    $(".login").addClass("hidden")
 
                     // get active users tracked movie list
-                    trackedMoviesController.getUserMovieList().then()
+                    // trackedMoviesController.getUserMovieList().then()
+
                     
                 } else {
                     // hide logout button
-                    document.querySelector(".nav__logoutBtn").classList.add("hidden")
+                    $(".nav__logoutBtn").addClass("hidden")
                     
+                    // display the login form
+                    $(".login").removeClass("hidden")
+
+                    // clear out the active user info on the auth object
                     auth.activeUser = null
                 }
             })

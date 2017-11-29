@@ -9,6 +9,7 @@ const renderer = require("../renderer/renderer")
 const trackedMoviesController = Object.create(null, {
     "getUserMovieList": {
         value: function (userUID) {
+            movieFactory.cache = []
             dataManager.setUID(userUID)
             dataManager.firebaseGET().then(userDB => {
                 userMovieListArray = Object.keys(userDB)

@@ -6,7 +6,8 @@
     <title>Movie History</title>
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <link rel="stylesheet" href="./node_modules/materialize-css/dist/css/materialize.css">
+    <link rel="stylesheet" href="./styles/renderer.css">
     <link rel="stylesheet" href="./styles/styles.css">
 
 </head>
@@ -14,26 +15,26 @@
 <body>
     <nav class="nav">
 
-            <span class="nav__userDisplay col s6"></span>
-            <!-- Logout button will be hidden by default until user is logged in -->
-            <div class=" right col s6">
-                <button class="nav__logoutBtn hidden btn waves-effect waves-light white black-text">Logout</button>
+        <span class="nav__userDisplay col s6"></span>
+        <!-- Logout button will be hidden by default until user is logged in -->
+        <div class=" right col s6">
+            <button class="nav__logoutBtn hidden btn waves-effect waves-light white black-text">Logout</button>
+        </div>
+    </nav>
+    <div class="siteContent container">
+        <div class="row search">
+            <div class="search__input input-field col s7">
+                <input type="text" name="search" id="searchField" />
+                <label for="searchField">Search</label>
             </div>
-        </nav>
-        <div class="siteContent container">
-            <div class="row search">
-                <div class="search__input input-field col s7">
-                    <input type="text" name="search" id="searchField" />
-                    <label for="searchField">Search</label>
-                </div>
-                <div class="search__buttons col s5 valign-wrapper"></div>        
-                <button class="nav__findMovie btn waves-effect waves-light">Find A Movie</button>
-                <button class="nav__searchMyMovies btn waves-effect waves-light">Search My Movies</button>
-            </div>
+            <div class="search__buttons col s5 valign-wrapper"></div>
+            <button class="nav__findMovie btn waves-effect waves-light">Find A Movie</button>
+            <button class="nav__searchMyMovies btn waves-effect waves-light">Search My Movies</button>
+        </div>
         <header class="header">
             <h1 class="header__text center-align">Movie History</h1>
         </header>
-        
+
         <section class="login">
             <form class="login__form">
                 <div class="input-field">
@@ -47,11 +48,12 @@
             </form>
             <button class="login__loginBtn btn waves-effect waves-light">Login</button>
             <button class="login__registerBtn btn waves-effect waves-light red">Register</button>
-        </section>    <!-- end of login page -->
-        
+        </section>
+        <!-- end of login page -->
+
         <section class="movieResults center-align">
             <header class="movieResults__header center-align ">
-                
+
             </header>
             <section class="row">
                 <section class="cardContainer movieResults__cardContainer col s12">
@@ -59,8 +61,9 @@
                 </section>
             </section>
             <p> -- PLACEHOLDER SEARCH RESULTS -- </p>
-        </section>    <!-- end of movieResults page -->
-        
+        </section>
+        <!-- end of movieResults page -->
+
         <section class="trackedMovies center-align">
             <button class="trackedMovies__unwatchedMovies btn waves-effect waves-light">Unwatched Movies</button>
             <button class="trackedMovies__watchedMovies btn waves-effect waves-light">Watched Movies</button>
@@ -69,16 +72,31 @@
 
                 </section>
             </section>
-            
-            <p> -- TRACKED MOVIES GO HERE -->  </p>
-            </section>
-        </section>    <!-- end of trackedMovies page -->
-          
+
+            <p> -- TRACKED MOVIES GO HERE --> </p>
+        </section>
+        </section>
+        <!-- end of trackedMovies page -->
+        <div id="rating__modal" class="modal">
+            <div class="modal-content">
+                <h1>RATE THIS MOVIE!</h>
+                    <ul class="movie-rating">
+                        <li class='movie-rating__item1'></li>
+                        <li class='movie-rating__item2'></li>
+                        <li class='movie-rating__item3'></li>
+                        <li class='movie-rating__item4'></li>
+                        <li class='movie-rating__item5'></li>
+                    </ul>
+            </div>
+            <div class="modal-footer">
+                <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Confirm</a>
+            </div>
+        </div>
+        <!-- end of movie rating modal page -->
     </div>
     <footer class="footer"></footer>
 
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+
     <script src="./build/bundle.js"></script>
 </body>
 

@@ -1,8 +1,6 @@
 // author: Greg Lawrence
 // purpose: to add event listeners to tracked movies list to allow user to filter movies between unwatched and watched/rated
 
-const $ = require("./jquery")
-
 
 const addListenersTrackedMovies = function () {
 // add listener to the buttons in the Tracked Movies DOM section

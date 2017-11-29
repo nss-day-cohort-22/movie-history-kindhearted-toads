@@ -2,7 +2,6 @@
 // purpose: add listeners for click events on buttons in the search field
 
 const dataManager = require("./util/dataManager")
-const $ = require("jquery")
 const renderer = require("./renderer/renderer")
 const movieFactory = require("./util/movieFactory")
 //

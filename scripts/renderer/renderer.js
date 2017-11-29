@@ -122,4 +122,4 @@ const Renderer = Object.create(null, {
 
 });
 
-module.requires = Renderer;
+module.exports = Renderer;

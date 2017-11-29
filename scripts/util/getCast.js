@@ -9,10 +9,10 @@ const getCast = Object.create(null, {
     
     //call the dataManager to ping the api by movie Id to retreive the actors for the movie - send it to decompose
     "fetch": {"value": function(movieId){
-        dataManager.getCast(movieId).then(
+        return dataManager.getCast(movieId).then(
             function(movie){
                 this.cache = movie
-                this.decompose(movie.cast)
+                return this.decompose(movie.cast)
             })
     }, "writable": true, "enumberable": true},
         

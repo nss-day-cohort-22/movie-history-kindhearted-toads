@@ -1,5 +1,6 @@
 const dataManager = require("./util/dataManager");
 const movieFactory = require("./util/movieFactory");
+const getCast = require("./util/getCast");
 const renderer = require("./renderer/renderer.js");
 const trackedMoviesController = require("./trackedMovies/trackedMoviesController");
 
@@ -29,11 +30,18 @@ addListenersCards = () => {
         }
 
         if (targetId.includes("additionalDetails")) {
-            const movieId = parseInt(targetId.split("|")[1]);
-            const actorsEl = document.querySelector(`#movie__actors|${movie.movieId}`);
-            console.log("opened additional details");
-            if (actorsEl.firstChild) {
+            const movieId = parseInt(targetId.split("-")[1]);
+            const actorsEl = $(`#movie__actors-${movieId}`);
+
+            if (actorsEl.children().length > 0) {
                 console.log("already has an actor set");
+            } else {
+                const cast = [];
+                getCast.fetch(movieId).then(result => {
+                    console.log(result);
+                    cast = $(renderer.getActors(result));
+                    cast.appendTo($(`movie__actors-${movieId}`));
+                }) 
             }
         }
 

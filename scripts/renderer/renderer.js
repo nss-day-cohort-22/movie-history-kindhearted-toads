@@ -35,7 +35,7 @@ const Renderer = Object.create(null, {
         value: function (movie, el) {
 
             let $cardContainer = $("<div>", {
-                "class": "col m4 card__wrapper hoverable",
+                "class": "col m4 card__wrapper",
                 "id": `card${movie.movieId}`
             });
     
@@ -95,7 +95,7 @@ const Renderer = Object.create(null, {
             
             // put the pieces together
             $cardContainer.html(
-                `<div class="card sticky-action">
+                `<div class="card sticky-action hoverable">
                     <div class="card-image">
                     <img class="activiator" src="${posterPath}">
                     </div>
@@ -115,7 +115,7 @@ const Renderer = Object.create(null, {
 
             // Add Event Listeners to the Card
 
-            return this.AddEventListener($cardContainer);
+            return $cardContainer;
 
         },
         enumerable: true

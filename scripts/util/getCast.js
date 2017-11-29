@@ -18,6 +18,7 @@ const getCast = Object.create(null, {
         
     //call thist method to convert an object of all cast into an array of the top 5 actors - return the array
     "decompose": {"value": function(castArray){
+
         let actorsArray = []
 
         let amountOfActors = 0

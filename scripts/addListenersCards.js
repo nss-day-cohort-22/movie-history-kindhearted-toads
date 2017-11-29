@@ -18,17 +18,20 @@ $(".cardContainer").on("click", (e) => {
         }
     }
 
-    if (elClass.includes("card__watched")) {
-        const movieId = parseInt(targetId.split("|")[1]);
-        console.log("card__watched - launch modal");
+    // if (elClass.includes("card__watched")) {
+    //     const movieId = parseInt(targetId.split("|")[1]);
+    //     console.log("card__watched - launch modal");
         
-    }
+    // }
+
 
     if (elClass.includes("card__delete-chip")) {
         const movieId = parseInt(targetId.split("|")[1]);
         console.log("card__delete-chip");
+        dataManager.firebaseDELETE(movieId).then(() => {
+            $(`#card${movieId}`).hide();
+        })
         // remove element from the display
-        $(`#card${movieId}`).hide();
     }
     
     

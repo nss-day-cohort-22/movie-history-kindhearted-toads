@@ -7,11 +7,11 @@ const movieFactory = Object.create(null, {
     
     "build": {
         "value":
-            function (userTable = {"fbId":null,"rating":null}, apiObject) {
+            function (apiObject, userTable = {"fbId":null,"rating":null} ) {
 
                 let actorsArray = []
 
-                if(apiObject.hasOwnProperty(credits)){
+                if(apiObject.hasOwnProperty("credits")){
                     for (let index = 0; index < 3; index++) {
                         actorsArray.unshift(apiObject.credits.cast[index])
                     }

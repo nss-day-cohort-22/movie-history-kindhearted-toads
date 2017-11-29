@@ -2,8 +2,8 @@
 // purpose: to watch for changes to the active user in firebase and run code based on whether there is a user signed in
 
 const firebase = require("firebase")
-const trackedMoviesController = require("../trackedMovies/trackedMoviesController")
-
+// const trackedMoviesController = require("../trackedMovies/trackedMoviesController")
+const addListenersSearch = require("../addListenersSearch")
 
 
 const observer = Object.create(null, {
@@ -26,7 +26,8 @@ const observer = Object.create(null, {
                     // get active users tracked movie list
                     // trackedMoviesController.getUserMovieList().then()
 
-                    
+                    addListenersSearch()
+                   
                 } else {
                     // hide logout button
                     $(".nav__logoutBtn").addClass("hidden")

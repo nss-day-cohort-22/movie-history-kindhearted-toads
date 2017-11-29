@@ -3,14 +3,14 @@
 
 const dataManager = require("../util/dataManager")
 const movieFactory = require("../util/movieFactory")
-const render = require("../renderer/renderer")
+const renderer = require("../renderer/renderer")
+
 
 const trackedMoviesController = Object.create(null, {
     "getUserMovieList": {
         value: function (userUID) {
             dataManager.setUID(userUID)
             dataManager.firebaseGET().then(userDB => {
-                debugger
                 userMovieListArray = Object.keys(userDB)
                     .map(key => {
                         userDB[key].fbId = key
@@ -27,12 +27,12 @@ const trackedMoviesController = Object.create(null, {
         value: function (userMovieListArray) {
             userMovieListArray.forEach( movie => {
                 dataManager.getMovieById(movie.movieId).then(returnedMovieData =>{
-                    render.append(movieFactory.build(returnedMovieData, movie), "trackedMovies__container")
+                    renderer.append(movieFactory.build(returnedMovieData, movie), "trackedMovies__cardContainer")
                 })
             })
         }
     }
 })
 
-
+//
 module.exports = trackedMoviesController

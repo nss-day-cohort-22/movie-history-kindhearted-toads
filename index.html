@@ -22,8 +22,8 @@
             </div>
         </nav>
         <div class="siteContent container">
-            <div class="row">
-                <div class="search input-field col s7">
+            <div class="row search">
+                <div class="search__input input-field col s7">
                     <input type="text" name="search" id="searchField" />
                     <label for="searchField">Search</label>
                 </div>
@@ -52,15 +52,25 @@
         
         <section class="movieResults center-align">
             <header class="movieResults__header center-align ">
+                
             </header>
+            <section class="row">
+                <section class="cardContainer movieResults__cardContainer col s12">
+
+                </section>
+            </section>
             <p> -- PLACEHOLDER SEARCH RESULTS -- </p>
         </section>    <!-- end of movieResults page -->
         
         <section class="trackedMovies center-align">
             <button class="trackedMovies__unwatchedMovies btn waves-effect waves-light">Unwatched Movies</button>
             <button class="trackedMovies__watchedMovies btn waves-effect waves-light">Watched Movies</button>
+            <section class="row">
+                <section class="cardContainer trackedMovies__cardContainer col s12">
+
+                </section>
+            </section>
             
-            <section "trackedMovies__results">
             <p> -- TRACKED MOVIES GO HERE -->  </p>
             </section>
         </section>    <!-- end of trackedMovies page -->

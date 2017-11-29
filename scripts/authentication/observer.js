@@ -3,7 +3,7 @@
 
 const firebase = require("firebase")
 const trackedMoviesController = require("../trackedMovies/trackedMoviesController")
-
+const addListenersSearch = require("../addListenersSearch")
 
 
 const observer = Object.create(null, {
@@ -26,7 +26,8 @@ const observer = Object.create(null, {
                     // get active users tracked movie list
                     trackedMoviesController.getUserMovieList(user.uid)
 
-                    
+                    addListenersSearch()
+                   
                 } else {
                     // hide logout button
                     $(".nav__logoutBtn").addClass("hidden")

@@ -11,16 +11,15 @@ const trackedMoviesController = Object.create(null, {
         value: function (userUID) {
             dataManager.setUID(userUID)
             dataManager.firebaseGET().then(userDB => {
-                userMovieListArray = Object.keys(userDB)
-                    .map(key => {
-                        userDB[key].fbId = key
-                        return userDB[key]
-                    })
-                return userMovieListArray
-            }).then( userMovieListArray => {
-                this.getMovieDetails(userMovieListArray)
-            }
-            )
+                if(userDB){
+                    userMovieListArray = Object.keys(userDB)
+                        .map(key => {
+                            userDB[key].fbId = key
+                            return userDB[key]
+                        })
+                    this.getMovieDetails(userMovieListArray)
+                } 
+            })
         }
     },
     "getMovieDetails": {

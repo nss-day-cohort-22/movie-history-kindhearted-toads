@@ -24,7 +24,7 @@ const observer = Object.create(null, {
                     $(".login").addClass("hidden")
 
                     // get active users tracked movie list
-                    // trackedMoviesController.getUserMovieList().then()
+                    trackedMoviesController.getUserMovieList(user.uid)
 
                     addListenersSearch()
                    

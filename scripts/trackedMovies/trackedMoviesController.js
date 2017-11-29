@@ -5,17 +5,20 @@ const dataManager = require("../util/dataManager")
 const movieFactory = require("../util/movieFactory")
 const renderer = require("../renderer/renderer")
 
+
 const trackedMoviesController = Object.create(null, {
     "getUserMovieList": {
-        value: function () {
+        value: function (userUID) {
+            dataManager.setUID(userUID)
             dataManager.firebaseGET().then(userDB => {
+                debugger
                 userMovieListArray = Object.keys(userDB)
                     .map(key => {
                         userDB[key].fbId = key
                         return userDB[key]
                     })
                 return userMovieListArray
-            }).then( function (userMovieListArray) {
+            }).then( userMovieListArray => {
                 this.getMovieDetails(userMovieListArray)
             }
             )

@@ -19,7 +19,6 @@ const Renderer = Object.create(null, {
         },
         enumerable: true
     },
-
     // this function actually generates a new card
     "generateCard": {
         value: function (movie, el) {
@@ -35,7 +34,7 @@ const Renderer = Object.create(null, {
             // build the list for the ratings
             let ratingString = "";
             
-            if (rating) {
+            if (rating !== 0) {
                 for (let i = 0; i < 5; i++) {
                     if (i < rating) {
                         ratingString += "<li class='c-rating__item--starred'></li>";
@@ -45,15 +44,15 @@ const Renderer = Object.create(null, {
                 }
             }
             
-
             let chipDiv =   `<div class="chip">
                                 delete
-                                <i class="close material-icons card__delete-chip" id="chip|${movie.movieId}">close</i>
+                                <i class="close material-icons card__delete-chip" id="chip|${movie.fbId}@${movie.movieId}">close</i>
                             </div>`;
 
             let actionDiv = "";
 
-            if (movie.rating) {
+            if (movie.rating !== 0) {
+                $cardContainer.addClass("watched");
                 actionDiv = `<div class="card-action" id="movieAction|${movie.movieId}">
                              <ul class="c-rating">
                                  ${ratingString}
@@ -61,8 +60,9 @@ const Renderer = Object.create(null, {
                          </div>`;
                     
             } else if (movie.fbId) {
+                $cardContainer.addClass("unwatched");
                 actionDiv = `<div class="card-action" id="movieaction|${movie.movieId}">
-                         <a class="card__watched" id="watched|${movie.movieId}">Watched?</a>
+                         <a href="#rating__modal" class="card__watched modal-trigger" id="watched|${movie.movieId}">Watched?</a>
                          </div>`;
                     
             } else {
@@ -90,7 +90,7 @@ const Renderer = Object.create(null, {
                         ${actionDiv}
                         ${chipDiv}
                     <div class="card-reveal">
-                        <span class="card-title grey-text text-darken-4">${movie.movieName}<i class="material-icons right">close</i></span>
+                        <span class="card-title grey-text text-darken-4">${movie.movieName}<i class="material-icons right" id="additionalDetails|${movie.movieId}">close</i></span>
                         <p class="movie__overview">${overview}</p>
                     </div>
                 </div>

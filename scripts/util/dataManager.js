@@ -63,7 +63,7 @@ const dataManager = Object.create(null, {
                 })
         }, "writable": true, "enumerable": true
     },
-    
+
     "getMovieById": {
         "value": function(movieID) {
             return $.ajax({

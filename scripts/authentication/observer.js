@@ -3,7 +3,9 @@
 const firebase = require("firebase")
 const trackedMoviesController = require("../trackedMovies/trackedMoviesController")
 const addListenersSearch = require("../addListenersSearch")
+const addListenersTrackedMovies = require("../trackedMovies/addListenersTrackedMovies")
 const addListenersCard = require("../addListenersCards");
+
 
 const observer = Object.create(null, {
     "init": {
@@ -14,6 +16,7 @@ const observer = Object.create(null, {
                     // store the current user info to auth object
                     auth.activeUser = user
                      
+                    // populate the navbar welcome message with active user
                     document.querySelector(".nav__userDisplay").innerHTML = `Welcome ${user.email}!`
 
                     // show logout button
@@ -22,18 +25,27 @@ const observer = Object.create(null, {
                     // hide login form
                     $(".login").addClass("hidden")
 
+                    // show searchbar
+                    $(".search").removeClass("hidden")
+
                     // get active users tracked movie list
                     trackedMoviesController.getUserMovieList(user.uid)
 
                     addListenersSearch()
+
+                    addListenersTrackedMovies()
+
                     addListenersCard()
                    
                 } else {
+                    // clear out welcome message in navbar
+                    document.querySelector(".nav__userDisplay").innerHTML = ""
+
                     // hide logout button
                     $(".nav__logoutBtn").addClass("hidden")
+                    // hide searchbar
+                    $(".search").addClass("hidden")
                     
-                    // display the login form
-                    $(".login").removeClass("hidden")
 
                     // clear out the active user info on the auth object
                     auth.activeUser = null

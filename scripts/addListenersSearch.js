@@ -39,6 +39,11 @@ const addListenersSearch = function() {
                         // send results to the render function to create DOM elements and place results in the DOM
                         renderer.append(movieFactory.build(movie), "movieResults__cardContainer");
                     });
+
+                    // check if any results were sent, if no results show a
+                    if ($(".movieResults__cardContainer").html() === "") {
+                        $(".movieResults__cardContainer").html("<h5>No matches found</h5>")
+                    }
                 })
 
                 
@@ -46,9 +51,6 @@ const addListenersSearch = function() {
                 // write code to show the Top 3 or Top 5 movies
             }
 
-            if ($(".movieResults__cardContainer").html() === "") {
-                $(".movieResults__cardContainer").html("<h5>No matches found</h5>")
-            }
         }
 
         
@@ -77,7 +79,8 @@ const addListenersSearch = function() {
                     renderer.append(movie, "trackedMovies__cardContainer")
                 })
             }
-            //
+            
+            // check if any results were sent, if no results show a message
             if ($(".trackedMovies__cardContainer").html() === "") {
                 $(".trackedMovies__cardContainer").html("<h5>No matches found</h5>")
             }

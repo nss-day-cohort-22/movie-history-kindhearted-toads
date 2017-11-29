@@ -1,8 +1,10 @@
-// Author: Greg Lawrence
+// author: Greg Lawrence
 // purpose: to watch for changes to the active user in firebase and run code based on whether there is a user signed in
 
 const firebase = require("firebase")
-const userListController = require("../userList/userListController")
+const trackedMoviesController = require("../trackedMovies/trackedMoviesController")
+
+
 
 const observer = Object.create(null, {
     "init": {
@@ -22,7 +24,7 @@ const observer = Object.create(null, {
                     document.querySelector(".login").classList.add("hidden")
 
                     // get active users tracked movie list
-                    userListController.getUserMovieList().then()
+                    trackedMoviesController.getUserMovieList().then()
                     
                 } else {
                     // hide logout button

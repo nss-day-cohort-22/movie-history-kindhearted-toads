@@ -10,9 +10,11 @@
 
 <body>
     <nav class="nav">
-        <input type="text" name="search" placeholder="...search" />
-        <button class="nav__findMovie">Find Movie</button>
-        <button class="nav__searchMyMovies">Search My Movies</button>
+        <section class="nav__search">
+            <input type="text" name="search" placeholder="...search" />
+            <button class="nav__findMovie">Find A Movie</button>
+            <button class="nav__searchMyMovies">Search My Movies</button>
+        </section>
         <span class="nav__userDisplay"></span>
         <!-- Logout button will be hidden by default until user is logged in -->
         <button class="nav__logoutBtn hidden">Logout</button>
@@ -35,10 +37,10 @@
     
     <section class="movieSearch center">
         <header class="movieSearch__header center">
-            
+
         </header>
         <section class="movieSearch__results row">
-            <section class="movieSearch__results col s12 cards-container">
+            <section class="movieSearch__container col s12 cards-container">
                 <p> -- PLACEHOLDER SEARCH RESULTS -- </p>
             </section>
         </section>

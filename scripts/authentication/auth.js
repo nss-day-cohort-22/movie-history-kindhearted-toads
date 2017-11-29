@@ -1,3 +1,6 @@
+// author: Greg Lawrence
+// purpose: to handle everything related to creating a user, logging into site, logging out.
+
 const firebase = require("firebase")
 const observer = require("./observer")
 

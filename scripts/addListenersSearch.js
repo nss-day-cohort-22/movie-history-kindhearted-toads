@@ -65,6 +65,10 @@ const addListenersSearch = function() {
                     renderer.append(movie, "trackedMovies__cardContainer")
                 })
             }
+            //
+            if ($(".trackedMovies__cardContainer").html() === "") {
+                $(".trackedMovies__cardContainer").html("<h5>No matches found</h5>")
+            }
 
             // make sure all tracked movies are displayed and none of the cards have the "hidden" class
             /* -- psuedo code, may work, may not -- */

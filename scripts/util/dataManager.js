@@ -60,7 +60,7 @@ const dataManager = Object.create(null, {
         }, "writable": true, "enumerable": true
     },
     
-    "getMovieByID": {
+    "getMovieById": {
         "value": function(movieID) {
             return $.ajax({
                 "url": `https://api.themoviedb.org/3/movie/${movieID}?api_key=feae42ac1de7d9384c48dcb8682cb73f&append_to_response=credits`,

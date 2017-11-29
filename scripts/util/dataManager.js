@@ -1,7 +1,6 @@
 // Data Handler - Chris Miller
 // Responsible for creating and returning all ajax calls
 
-const $ = require("jquery")
 const auth = require("../authentication/auth")
 const firebase = require("firebase")
 

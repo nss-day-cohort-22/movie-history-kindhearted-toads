@@ -59,6 +59,17 @@
   background-repeat: no-repeat;
 }
 
+.movie-rating__item1, .movie-rating__item2, .movie-rating__item3, .movie-rating__item4, .movie-rating__item5 {
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 24px;
+      -ms-flex: 0 0 24px;
+          flex: 0 0 24px;
+  height: 24px;
+  background: url("../images/stars.svg");
+  background-position: 0 0;
+  background-repeat: no-repeat;
+}
+
 .b-rating__item:hover,
 .b-rating__item.is-active {
   background-position: -24px 0;

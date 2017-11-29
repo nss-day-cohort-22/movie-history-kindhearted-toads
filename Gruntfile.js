@@ -26,6 +26,11 @@ module.exports = function foo(grunt) {
                     "build/bundle.js": ["scripts/main.js"],
                 },
             },
+            app: {
+                files: {
+                    "./public/dist/js/main.js": ["./public/src/js/main.js"]
+                }
+            },
             options: {
                 browserifyOptions: {
                     debug: true,

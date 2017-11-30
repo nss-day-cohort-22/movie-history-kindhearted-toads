@@ -170,12 +170,12 @@ const Renderer = Object.create(null, {
                     </div>
                     <div class="card-content">
                         <span class="movie__title card-title activator grey-text text-darken-4">${movie.movieName}<i class="material-icons right"  id="additionalDetails-${movie.movieId}">more_vert</i></span>
-                    <p>${movie.releaseDate}</p>
-                    </div>
+                        </div>
                         ${actionDiv}
                         ${chipDiv}
                     <div class="card-reveal">
                         <span class="card-title grey-text text-darken-4">${movie.movieName}<i class="material-icons right">close</i></span>
+                        <p>${movie.releaseDate}</p>
                         <p class="movie__overview">${overview}</p>
                         <h6>Cast:</h6>
                         <ul class="movie__actors" id="movie__actors-${movie.movieId}">${actors}</ul>

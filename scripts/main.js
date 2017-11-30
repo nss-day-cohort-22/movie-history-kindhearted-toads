@@ -10,6 +10,7 @@ const addListenersCard = require("./addListenersCards");
 auth.init()
 
 
+
 $(document).ready(function () {
     $(".modal").modal({
         dismissable: true,
@@ -53,6 +54,8 @@ $(".movie-rating__item").on("click", e => {
     }
     $(e.target).addClass("rated")
 })
+
 addListenersSearch()
 addListenersTrackedMovies()
 addListenersCard()
+

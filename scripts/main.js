@@ -16,10 +16,13 @@ $(".modal").modal({
     complete: function () {
         $(".movie-rating__item").removeClass("movie-rating__item--starred")
         let targetId = $(".rated").attr("id")
-        const rating = parseInt(targetId.split("_")[1]);
-        dataManager.firebasePUT($("#rating__modal").attr("data-firebaseId"), { movidId: parseInt($("#rating__modal").attr("data-movieId")), rating: rating }).then(r => { })
-
-        renderer.trackedToWatched(parseInt($("#rating__modal").attr("data-movieId")), $("#rating__modal").attr("data-firebaseId"), rating)
+        if (targetId) {
+            const rating = parseInt(targetId.split("_")[1]);
+            $(".rated").removeClass("rated")
+            dataManager.firebasePUT($("#rating__modal").attr("data-firebaseId"), { movidId: parseInt($("#rating__modal").attr("data-movieId")), rating: rating }).then(r => { })
+    
+            renderer.trackedToWatched(parseInt($("#rating__modal").attr("data-movieId")), $("#rating__modal").attr("data-firebaseId"), rating)
+        }
     }
 });
 

@@ -4,10 +4,8 @@
 
 const addListenersTrackedMovies = function () {
     // add listener to the buttons in the Tracked Movies DOM section
-    document.querySelector(".trackedMovies").addEventListener("click", e =>{
-    
-        console.log(e)
-   
+    $(".trackedMovies").on("click", e =>{
+
         // check if the button clicked is "Unwatched Movies"
         if (e.target.className.includes("trackedMovies__unwatchedMovies")) {
             

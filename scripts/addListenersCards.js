@@ -1,5 +1,10 @@
+/**
+ * Krys Mathis
+ * Event listeners for the movie cards
+ */
 const dataManager = require("./util/dataManager");
 const movieFactory = require("./util/movieFactory");
+const getCast = require("./util/getCast");
 const renderer = require("./renderer/renderer.js");
 const trackedMoviesController = require("./trackedMovies/trackedMoviesController");
 
@@ -9,12 +14,12 @@ addListenersCards = () => {
 
         const elClass = e.target.className;
         const targetId = e.target.id;
-    
+
         if (elClass.includes("card__add-to-watchlist")) {
             const movieId = parseInt(targetId.split("|")[1]);
             // check if this movie exists already
-            if (movieFactory.cache.find(r=> r.id === movieId)) {
-                console.log("already on the watchlist");
+            if (movieFactory.cache.find(r => r.movieId === movieId)) {
+                Materialize.toast("Already on your list!", 4000);
             } else {
                 dataManager.firebasePOST(movieId).then((results) => {
                     const movieObj = {
@@ -29,7 +34,17 @@ addListenersCards = () => {
         }
 
         if (targetId.includes("additionalDetails")) {
-            console.log("opened additional details");
+            const movieId = parseInt(targetId.split("-")[1]);
+            const actorsEl = $(`#movie__actors-${movieId}`);
+    
+            if (!actorsEl.children().length > 0) {
+                let cast = [];
+                getCast.fetch(movieId).then(result => {
+                    cast = $(renderer.getActors(result));
+                    const ul = $(`#movie__actors-${movieId}`);
+                    cast.appendTo(ul);
+                })
+            }
         }
 
         if (elClass.includes("card__watched")) {
@@ -40,36 +55,23 @@ addListenersCards = () => {
             debugger
         }
 
-        if (elClass.includes("movie-rating___item")) {
-            const rating = parseInt(targetId.split("movie-rating___item")[1]);
-            dataManager.firebasePUT({movidId: 1234, rating: rating}).then(r=> {
-                const userTable = movieFactory.cache;
-                return userTable
-            }).then(result => {
-                dataManager.getMovieById(movieId);
-            });
-        }
-
 
         if (elClass.includes("card__delete-chip")) {
-            
+
             const movieIdParts = targetId.split("|")[1];
             const fbId = movieIdParts.split("@")[0];
             const movieId = parseInt(movieIdParts.split("@")[1]);
 
-            console.log("card__delete-chip");
-            
             dataManager.firebaseDELETE(fbId).then(() => {
                 $(`#card${movieId}`).hide();
-            }).then(()=> {
+            }).then(() => {
                 movieFactory.removeFromCache(movieId);
             })
 
-        // remove element from the display
         }
-    
-    
+
+
     });
 }
-    
+
 module.exports = addListenersCards;

@@ -31,11 +31,6 @@ const observer = Object.create(null, {
                     // get active users tracked movie list
                     trackedMoviesController.getUserMovieList(user.uid)
 
-                    addListenersSearch()
-
-                    addListenersTrackedMovies()
-
-                    addListenersCard()
                    
                 } else {
                     // clear out welcome message in navbar

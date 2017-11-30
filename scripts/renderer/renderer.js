@@ -150,8 +150,13 @@ const Renderer = Object.create(null, {
             // capture only the first 300 words
             const overview = movie.overview.length > 300 ? movie.overview.substring(0,300) + "..." : movie.overview;
             
+            let posterPath = "";
             // handle the poster path
-            const posterPath = `http://image.tmdb.org/t/p/w342${movie.imgPath}`;
+            if (movie.imgPath) {
+                const posterPath = `http://image.tmdb.org/t/p/w342${movie.imgPath}`;
+            } else {
+                // error handling
+            }
             
             // put the pieces together
             $cardContainer.html(

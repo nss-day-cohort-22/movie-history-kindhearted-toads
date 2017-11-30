@@ -1,3 +1,7 @@
+/**
+ * Krys Mathis
+ * This is for displaying cards
+ */
 const Renderer = Object.create(null, {
     
     "append": {
@@ -10,12 +14,19 @@ const Renderer = Object.create(null, {
     },
     
     "trackedToWatched": {
-        value: function (movie, el) {
+        value: function (movieId, rating) {
             // update object
-            // movie.watched = true;
-            const newCard = this.generateCard(movie, el);
             const existingCard = $(`#card${movie.movieId}`);
-            existingCard.replaceWith(newCard);
+            const existingAction = $(`#id="movieaction|${obj.movieId}`)
+
+            actionObj = {
+                "movieId": movieId, 
+                "rating": rating, 
+                "isWatchlist": true, 
+            }
+            const newAction = $(this.getAction(actionObj));
+            // replace existing
+            existingAction.replaceWith(newAction);
         },
         enumerable: true
     },
@@ -41,7 +52,7 @@ const Renderer = Object.create(null, {
     },
     "getActions": {
         value: function(obj) {
-
+   
             let actionDiv = "";
             // make sure the object is completely populated
             if (!obj.hasOwnProperty("rating") 
@@ -87,7 +98,7 @@ const Renderer = Object.create(null, {
     },
     // this function actually generates a new card
     "generateCard": {
-        value: function (movie, el) {
+        value: function (movie) {
 
             let $cardContainer = $("<div>", {
                 "class": "col m4 card__wrapper",
@@ -96,9 +107,9 @@ const Renderer = Object.create(null, {
     
             // create the string for the rating
             let rating = movie.rating;
-            
             // build the list for the ratings
             let ratingString = this.getRatingLi(rating);
+
             const isWatchlist = movie.fbId !== null && movie.rating !== null;
             let actors = this.getActors(movie.actorsArray);
 
@@ -108,56 +119,37 @@ const Renderer = Object.create(null, {
                                 <i class="close material-icons card__delete-chip" id="chip|${movie.fbId}@${movie.movieId}">close</i>
                             </div>`;
 
-            let actionDiv = "";
-
+            // if it's on the watchlist add the watched class
+            // othersise                
             if (isWatchlist) {
                 $cardContainer.addClass("watched");
             } else {
+                $cardContainer.addClass("unwatched");
                 chipDiv = "";
             }
-
+                            
             // Get the action div
             actionObj = {
                 movieId: movie.movieId, 
                 rating: rating, 
                 isWatchlist: isWatchlist, 
             }
-
             actionDiv = this.getActions(actionObj);
 
-            // if (movie.rating > 0 && isWatchlist) {
-            //     actionDiv = `<div class="card-action" id="movieAction|${movie.movieId}">
-            //                  <ul class="c-rating">
-            //                      ${this.getRatingLi(rating)}
-            //                  </ul>
-            //              </div>`;
-                    
-            // } else if (isWatchlist) {
-            //     $cardContainer.addClass("unwatched");
-            //     actionDiv = `<div class="card-action" id="movieaction|${movie.movieId}">
-            //              <a href="#rating__modal" class="card__watched modal-trigger" id="watched|${movie.movieId}">Watched?</a>
-            //              </div>`;
-                    
-            // } else {
-            //     actionDiv = `<div class="card-action">
-            //              <a class="card__add-to-watchlist" id="addToWatchlist|${movie.movieId}">Add To Watchlist</a>
-            //              </div>`;
-
-            // }
-
-            // capture only the first 30 words
-            const overview = movie.overview.length > 300 ? movie.overview.substring(0,300) : movie.overview;
+            // capture only the first 300 words
+            const overview = movie.overview.length > 300 ? movie.overview.substring(0,300) + "..." : movie.overview;
             
+            // handle the poster path
             const posterPath = `http://image.tmdb.org/t/p/w342${movie.imgPath}`;
             
             // put the pieces together
             $cardContainer.html(
                 `<div class="card sticky-action hoverable r-grid">
                     <div class="card-image">
-                    <img class="activiator" src="${posterPath}">
+                        <img class="activiator" src="${posterPath}">
                     </div>
                     <div class="card-content">
-                    <span class="movie__title card-title activator grey-text text-darken-4">${movie.movieName}<i class="material-icons right"  id="additionalDetails-${movie.movieId}">more_vert</i></span>
+                        <span class="movie__title card-title activator grey-text text-darken-4">${movie.movieName}<i class="material-icons right"  id="additionalDetails-${movie.movieId}">more_vert</i></span>
                     <p>${movie.releaseDate}</p>
                     </div>
                         ${actionDiv}
@@ -170,8 +162,6 @@ const Renderer = Object.create(null, {
                     </div>
                 </div>
                 `);
-
-            // Add Event Listeners to the Card
 
             return $cardContainer;
 

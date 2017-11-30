@@ -1,3 +1,7 @@
+/**
+ * Krys Mathis
+ * Event listeners for the movie cards
+ */
 const dataManager = require("./util/dataManager");
 const movieFactory = require("./util/movieFactory");
 const getCast = require("./util/getCast");
@@ -46,6 +50,7 @@ addListenersCards = () => {
         }
 
         if (elClass.includes("card__watched")) {
+            // Krys's code for testing
             //
         }
 

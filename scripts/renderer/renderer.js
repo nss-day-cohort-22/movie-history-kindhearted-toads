@@ -25,7 +25,7 @@ const Renderer = Object.create(null, {
             // the movie is now watched and has a rating
             const existingAction = $(`#movieaction${movieId}`)
 
-            actionObj = {
+            const actionObj = {
                 "movieId": movieId, 
                 "rating": rating, 
                 "isWatchlist": true, 
@@ -137,18 +137,19 @@ const Renderer = Object.create(null, {
                 $cardContainer.addClass("watched");
             } else if (isWatchlist) {
                 $cardContainer.addClass("unwatched");
+                
             } else {// unwatched untracked
                 chipDiv = "";
             }
                             
             // Get the action div
-            actionObj = {
+            const actionObj = {
                 movieId: movie.movieId, 
                 rating: rating, 
                 isWatchlist: isWatchlist, 
                 fbId: movie.fbId
             }
-            actionDiv = this.getActions(actionObj);
+            const actionDiv = this.getActions(actionObj);
 
             // capture only the first 300 words
             const overview = movie.overview.length > 300 ? movie.overview.substring(0,300) + "..." : movie.overview;

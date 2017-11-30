@@ -21,6 +21,7 @@ addListenersCards = () => {
             if (movieFactory.cache.find(r => r.movieId === movieId)) {
                 Materialize.toast("Already on your list!", 4000);
             } else {
+                $(`#card${movieId}`).hide();
                 dataManager.firebasePOST(movieId).then((results) => {
                     const movieObj = {
                         "movieId": movieId,
@@ -28,7 +29,6 @@ addListenersCards = () => {
                         "rating": 0
                     }
                     trackedMoviesController.getMovieDetails([movieObj]);
-                    $(`#card${movieId}`).remove();
                 });
             }
         }

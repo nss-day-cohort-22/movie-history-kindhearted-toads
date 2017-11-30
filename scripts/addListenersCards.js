@@ -21,6 +21,7 @@ addListenersCards = () => {
             if (movieFactory.cache.find(r => r.movieId === movieId)) {
                 Materialize.toast("Already on your list!", 4000);
             } else {
+                Materialize.toast("Added to watchlist", 3000);
                 $(`#card${movieId}`).hide();
                 dataManager.firebasePOST(movieId).then((results) => {
                     const movieObj = {
@@ -60,10 +61,9 @@ addListenersCards = () => {
             const movieIdParts = targetId.split("|")[1];
             const fbId = movieIdParts.split("@")[0];
             const movieId = parseInt(movieIdParts.split("@")[1]);
+            $(`#card${movieId}`).hide();
 
             dataManager.firebaseDELETE(fbId).then(() => {
-                $(`#card${movieId}`).hide();
-            }).then(() => {
                 movieFactory.removeFromCache(movieId);
             })
 

@@ -15,7 +15,7 @@ addListenersCards = () => {
             const movieId = parseInt(targetId.split("|")[1]);
             // check if this movie exists already
             if (movieFactory.cache.find(r=> r.movieId === movieId)) {
-                console.log("already on the watchlist");
+                Materialize.toast("Already on your list!", 4000);
             } else {
                 dataManager.firebasePOST(movieId).then((results) => {
                     const movieObj = {
@@ -36,19 +36,18 @@ addListenersCards = () => {
             if (actorsEl.children().length > 0) {
                 console.log("already has an actor set");
             } else {
-                const cast = [];
+                let cast = [];
                 getCast.fetch(movieId).then(result => {
-                    console.log(result);
                     cast = $(renderer.getActors(result));
-                    cast.appendTo($(`movie__actors-${movieId}`));
+                    const ul = $(`#movie__actors-${movieId}`);
+                    cast.appendTo(ul);
                 }) 
             }
         }
 
-        // if (elClass.includes("card__watched")) {
-        //     console.log("card__watched - launch modal");
-        // //class = modal-content
-        // }
+        if (elClass.includes("card__watched")) {
+            //
+        }
 
         if (elClass.includes("movie-rating___item")) {
             const rating = parseInt(targetId.split("movie-rating___item")[1]);
@@ -66,8 +65,6 @@ addListenersCards = () => {
             const movieIdParts = targetId.split("|")[1];
             const fbId = movieIdParts.split("@")[0];
             const movieId = parseInt(movieIdParts.split("@")[1]);
-
-            console.log("card__delete-chip");
             
             dataManager.firebaseDELETE(fbId).then(() => {
                 $(`#card${movieId}`).hide();

@@ -1,7 +1,7 @@
 //Get Cast - Chris Miller
 //use this module to fetch the cast by movie id - and decompose an object of cast members into an array of no more than the top 5 billed
 
-const dataManager = ("./dataManager")
+const dataManager = require("./dataManager")
 
 const getCast = Object.create(null, {
     //save the api results to cache, incase?
@@ -10,7 +10,7 @@ const getCast = Object.create(null, {
     //call the dataManager to ping the api by movie Id to retreive the actors for the movie - send it to decompose
     "fetch": {"value": function(movieId){
         return dataManager.getCast(movieId).then(
-            function(movie){
+            movie => {
                 this.cache = movie
                 return this.decompose(movie.cast)
             })

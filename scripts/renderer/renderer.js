@@ -20,6 +20,59 @@ const Renderer = Object.create(null, {
         enumerable: true
     },
 
+    "getRatingLi": {
+        value: function(rating) {
+            // build the list for the ratings
+            let ratingString = "";
+            
+            if (rating > 0) {
+                for (let i = 0; i < 5; i++) {
+                    if (i < rating) {
+                        ratingString += "<li class='c-rating__item--starred'></li>";
+                    } else {
+                        ratingString += "<li class='c-rating__item'></li>";
+                    }
+                }
+            }
+
+            return ratingString;
+        },
+        enumerable: true
+    },
+    "getActions": {
+        value: function(obj) {
+
+            let actionDiv = "";
+            // make sure the object is completely populated
+            if (!obj.hasOwnProperty("rating") 
+                || !obj.hasOwnProperty("isWatchList")
+                || !obj.hasOwnProperty("movieId")) {
+                return actionDiv;
+            }
+
+            if (obj.rating > 0 && obj.isWatchlist) {
+                actionDiv = `<div class="card-action" id="movieAction|${obj.movieId}">
+                             <ul class="c-rating">
+                                 ${this.getRatingLi(rating)}
+                             </ul>
+                         </div>`;
+                    
+            } else if (obj.isWatchlist) {
+                $cardContainer.addClass("unwatched");
+                actionDiv = `<div class="card-action" id="movieaction|${obj.movieId}">
+                         <a href="#rating__modal" class="card__watched modal-trigger" id="watched|${obj.movieId}">Watched?</a>
+                         </div>`;
+                    
+            } else {
+                actionDiv = `<div class="card-action">
+                         <a class="card__add-to-watchlist" id="addToWatchlist|${obj.movieId}">Add To Watchlist</a>
+                         </div>`;
+
+            }
+            return actionDiv;
+        }
+    },
+
     "getActors": {
         value: function(actors) {
             let listOfActors = "";
@@ -45,23 +98,11 @@ const Renderer = Object.create(null, {
             let rating = movie.rating;
             
             // build the list for the ratings
-            let ratingString = "";
-            
-            if (rating > 0) {
-                for (let i = 0; i < 5; i++) {
-                    if (i < rating) {
-                        ratingString += "<li class='c-rating__item--starred'></li>";
-                    } else {
-                        ratingString += "<li class='c-rating__item'></li>";
-                    }
-                }
-            }
-            
+            let ratingString = this.getRatingLi(rating);
             const isWatchlist = movie.fbId !== null && movie.rating !== null;
-
             let actors = this.getActors(movie.actorsArray);
 
-
+            // delete chip for items that are 
             let chipDiv =   `<div class="chip">
                                 delete
                                 <i class="close material-icons card__delete-chip" id="chip|${movie.fbId}@${movie.movieId}">close</i>
@@ -69,26 +110,40 @@ const Renderer = Object.create(null, {
 
             let actionDiv = "";
 
-            if (movie.rating > 0 && isWatchlist) {
+            if (isWatchlist) {
                 $cardContainer.addClass("watched");
-                actionDiv = `<div class="card-action" id="movieAction|${movie.movieId}">
-                             <ul class="c-rating">
-                                 ${ratingString}
-                             </ul>
-                         </div>`;
-                    
-            } else if (isWatchlist) {
-                $cardContainer.addClass("unwatched");
-                actionDiv = `<div class="card-action" id="movieaction|${movie.movieId}">
-                         <a href="#rating__modal" class="card__watched modal-trigger" id="watched|${movie.movieId}">Watched?</a>
-                         </div>`;
-                    
             } else {
-                actionDiv = `<div class="card-action">
-                         <a class="card__add-to-watchlist" id="addToWatchlist|${movie.movieId}">Add To Watchlist</a>
-                         </div>`;
                 chipDiv = "";
             }
+
+            // Get the action div
+            actionObj = {
+                movieId: movie.movieId, 
+                rating: rating, 
+                isWatchlist: isWatchlist, 
+            }
+
+            actionDiv = this.getActions(actionObj);
+
+            // if (movie.rating > 0 && isWatchlist) {
+            //     actionDiv = `<div class="card-action" id="movieAction|${movie.movieId}">
+            //                  <ul class="c-rating">
+            //                      ${this.getRatingLi(rating)}
+            //                  </ul>
+            //              </div>`;
+                    
+            // } else if (isWatchlist) {
+            //     $cardContainer.addClass("unwatched");
+            //     actionDiv = `<div class="card-action" id="movieaction|${movie.movieId}">
+            //              <a href="#rating__modal" class="card__watched modal-trigger" id="watched|${movie.movieId}">Watched?</a>
+            //              </div>`;
+                    
+            // } else {
+            //     actionDiv = `<div class="card-action">
+            //              <a class="card__add-to-watchlist" id="addToWatchlist|${movie.movieId}">Add To Watchlist</a>
+            //              </div>`;
+
+            // }
 
             // capture only the first 30 words
             const overview = movie.overview.length > 300 ? movie.overview.substring(0,300) : movie.overview;
@@ -97,7 +152,7 @@ const Renderer = Object.create(null, {
             
             // put the pieces together
             $cardContainer.html(
-                `<div class="card sticky-action hoverable">
+                `<div class="card sticky-action hoverable r-grid">
                     <div class="card-image">
                     <img class="activiator" src="${posterPath}">
                     </div>
@@ -110,6 +165,7 @@ const Renderer = Object.create(null, {
                     <div class="card-reveal">
                         <span class="card-title grey-text text-darken-4">${movie.movieName}<i class="material-icons right">close</i></span>
                         <p class="movie__overview">${overview}</p>
+                        <h6>Cast:</h6>
                         <ul class="movie__actors" id="movie__actors-${movie.movieId}">${actors}</ul>
                     </div>
                 </div>

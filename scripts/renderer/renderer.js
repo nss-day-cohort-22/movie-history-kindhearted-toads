@@ -159,7 +159,7 @@ const Renderer = Object.create(null, {
             if (movie.imgPath !== null) {
                 posterPath = `http://image.tmdb.org/t/p/w342${movie.imgPath}`;
             } else {
-                // error handling
+                posterPath = "https://dummyimage.com/220x331&text=No+Image+Available"
             }
             
             // put the pieces together

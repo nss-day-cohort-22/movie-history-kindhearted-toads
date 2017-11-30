@@ -22,7 +22,7 @@ addListenersCards = () => {
                 Materialize.toast("Already on your list!", 4000);
             } else {
                 Materialize.toast("Added to watchlist", 3000);
-                $(`#card${movieId}`).hide();
+                $(`#cardut${movieId}`).hide();
                 dataManager.firebasePOST(movieId).then((results) => {
                     const movieObj = {
                         "movieId": movieId,
@@ -58,10 +58,14 @@ addListenersCards = () => {
 
         if (elClass.includes("card__delete-chip")) {
 
-            const movieIdParts = targetId.split("|")[1];
-            const fbId = movieIdParts.split("@")[0];
-            const movieId = parseInt(movieIdParts.split("@")[1]);
-            $(`#card${movieId}`).remove();
+            const movieIdParts = targetId.split("|");
+            const fbId = movieIdParts[1];
+            const movieId = parseInt(movieIdParts[2]);
+            
+            
+            const card = $(`#card${movieId}`);
+            card.hide();
+            card.remove();
 
             dataManager.firebaseDELETE(fbId).then(() => {
                 movieFactory.removeFromCache(movieId);

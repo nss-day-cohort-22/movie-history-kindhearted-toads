@@ -19,7 +19,7 @@ $(".modal").modal({
         if (targetId) {
             const rating = parseInt(targetId.split("_")[1]);
             $(".rated").removeClass("rated")
-            dataManager.firebasePUT($("#rating__modal").attr("data-firebaseId"), { movidId: parseInt($("#rating__modal").attr("data-movieId")), rating: rating }).then(r => { })
+            dataManager.firebasePUT($("#rating__modal").attr("data-firebaseId"), { movieId: parseInt($("#rating__modal").attr("data-movieId")), rating: rating }).then(r => { })
     
             renderer.trackedToWatched(parseInt($("#rating__modal").attr("data-movieId")), $("#rating__modal").attr("data-firebaseId"), rating)
         }

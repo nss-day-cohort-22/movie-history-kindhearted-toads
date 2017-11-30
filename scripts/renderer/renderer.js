@@ -20,7 +20,7 @@ const Renderer = Object.create(null, {
             renderer.trackedToWatched(movieId, 4);
  
          */
-        value: function (movieId, rating) {
+        value: function (movieId, fbId, rating) {
             // Update the existing movie card to reflect that
             // the movie is now watched and has a rating
             const existingAction = $(`#movieaction${movieId}`)
@@ -29,6 +29,7 @@ const Renderer = Object.create(null, {
                 "movieId": movieId, 
                 "rating": rating, 
                 "isWatchlist": true, 
+                "fbId": fbId
             }
             const newAction = $(this.getActions(actionObj));
             // replace existing
@@ -63,7 +64,8 @@ const Renderer = Object.create(null, {
             // make sure the object is completely populated
             if (!obj.hasOwnProperty("rating") 
                 || !obj.hasOwnProperty("isWatchlist")
-                || !obj.hasOwnProperty("movieId")) {
+                || !obj.hasOwnProperty("movieId")
+                || !obj.hasOwnProperty("fbId")) {
                 return actionDiv;
             }
 
@@ -76,7 +78,7 @@ const Renderer = Object.create(null, {
                     
             } else if (obj.isWatchlist) {
                 actionDiv = `<div class="card-action" id="movieaction${obj.movieId}">
-                         <a href="#rating__modal" class="card__watched modal-trigger" id="watched|${obj.movieId}">Watched?</a>
+                         <a href="#rating__modal" class="card__watched modal-trigger" id="watched|${obj.movieId}|${obj.fbId}">Watched?</a>
                          </div>`;
                     
             } else {
@@ -144,6 +146,7 @@ const Renderer = Object.create(null, {
                 movieId: movie.movieId, 
                 rating: rating, 
                 isWatchlist: isWatchlist, 
+                fbId: movie.fbId
             }
             actionDiv = this.getActions(actionObj);
 

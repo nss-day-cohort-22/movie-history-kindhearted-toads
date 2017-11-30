@@ -13,7 +13,8 @@ const addListenersSearch = function() {
 
         
         // get value from search field
-        let searchQuery = $("#searchField").val()
+        let searchfield = $("#searchField")
+        let searchQuery = searchfield.val()
         
         
         // check if the button clicked was Find A Movie
@@ -46,6 +47,8 @@ const addListenersSearch = function() {
                     if ($(".movieResults__cardContainer").html() === "") {
                         $(".movieResults__cardContainer").html("<h5>No matches found</h5>")
                     }
+
+                    searchfield.val("")
                 })
                 
             } else {
@@ -74,6 +77,7 @@ const addListenersSearch = function() {
                         renderer.append(movie, "trackedMovies__cardContainer")
                     }
 
+                    searchfield.val("")
                 })
             } else {
                 // if nothing is in search input field and user clicks "Search My Movies", show ALL of their tracked movies

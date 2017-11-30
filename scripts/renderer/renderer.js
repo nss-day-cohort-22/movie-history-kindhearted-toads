@@ -152,8 +152,8 @@ const Renderer = Object.create(null, {
             
             let posterPath = "";
             // handle the poster path
-            if (movie.imgPath) {
-                const posterPath = `http://image.tmdb.org/t/p/w342${movie.imgPath}`;
+            if (movie.imgPath !== null) {
+                posterPath = `http://image.tmdb.org/t/p/w342${movie.imgPath}`;
             } else {
                 // error handling
             }

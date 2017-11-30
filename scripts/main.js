@@ -9,7 +9,6 @@ const addListenersCard = require("./addListenersCards");
 
 auth.init()
 
-<<<<<<< HEAD
 
 $(document).ready(function () {
     $(".modal").modal({
@@ -19,7 +18,6 @@ $(document).ready(function () {
             let targetId = $(".rated").attr("id")
             const rating = parseInt(targetId.split("_")[1]);
             const stuff = [parseInt($("#rating__modal").attr("data-firebaseId")), parseInt($("#rating__modal").attr("data-movieId"))]
-            debugger
             dataManager.firebasePUT(parseInt($("#rating__modal").attr("data-firebaseId")),{movidId: parseInt($("#rating__modal").attr("data-movieId")), rating: rating}).then(r=> {
                 movieFactory.cache;
                 return userTable
@@ -55,8 +53,6 @@ $(".movie-rating__item").on("click", e => {
     }
     $(e.target).addClass("rated")
 })
-=======
 addListenersSearch()
 addListenersTrackedMovies()
 addListenersCard()
->>>>>>> 3be1d5ce4fb0abadde8fdb9e9a840c7963d50c8f

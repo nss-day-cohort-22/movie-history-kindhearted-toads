@@ -24,6 +24,9 @@ const Renderer = Object.create(null, {
             // Update the existing movie card to reflect that
             // the movie is now watched and has a rating
             const existingAction = $(`#movieaction${movieId}`)
+            // card goes from unwatched to watched
+            const card = $(`#card${movieId}`);
+            card.removeClass("unwatched").addClass("watched");
 
             const actionObj = {
                 "movieId": movieId, 

@@ -32,20 +32,6 @@ const observer = Object.create(null, {
                     trackedMoviesController.getUserMovieList(user.uid)
 
 
-                    const dataManager = require("../util/datamanager.js")
-                    
-                    $(".modal").modal({
-                        dismissable: true,
-                        complete: function () {
-                            $(".movie-rating__item").removeClass("movie-rating__item--starred")
-                            let targetId = $(".rated").attr("id")
-                            const rating = parseInt(targetId.split("_")[1]);
-                            const stuff = [parseInt($("#rating__modal").attr("data-firebaseId")), parseInt($("#rating__modal").attr("data-movieId"))]
-                            dataManager.firebasePUT($("#rating__modal").attr("data-firebaseId"), { movidId: parseInt($("#rating__modal").attr("data-movieId")), rating: rating }).then(r => { })
-                        }
-                    });
-
-
                 } else {
                     // clear out welcome message in navbar
                     document.querySelector(".nav__userDisplay").innerHTML = ""

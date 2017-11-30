@@ -8,7 +8,20 @@ const addListenersCard = require("./addListenersCards");
 
 auth.init()
 
+const dataManager = require("./util/datamanager.js")
+const renderer = require("./renderer/renderer.js")
 
+$(".modal").modal({
+    dismissable: true,
+    complete: function () {
+        $(".movie-rating__item").removeClass("movie-rating__item--starred")
+        let targetId = $(".rated").attr("id")
+        const rating = parseInt(targetId.split("_")[1]);
+        dataManager.firebasePUT($("#rating__modal").attr("data-firebaseId"), { movidId: parseInt($("#rating__modal").attr("data-movieId")), rating: rating }).then(r => { })
+
+        renderer.trackedToWatched(parseInt($("#rating__modal").attr("data-movieId")), $("#rating__modal").attr("data-firebaseId"), rating)
+    }
+});
 
 $(".movie-rating__item") //highlight stars on hover
     .hover(function () {

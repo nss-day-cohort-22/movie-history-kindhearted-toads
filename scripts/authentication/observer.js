@@ -2,9 +2,10 @@
 // purpose: to watch for changes to the active user in firebase and run code based on whether there is a user signed in
 const firebase = require("firebase")
 const trackedMoviesController = require("../trackedMovies/trackedMoviesController")
-const addListenersSearch = require("../addListenersSearch")
-const addListenersTrackedMovies = require("../trackedMovies/addListenersTrackedMovies")
-const addListenersCard = require("../addListenersCards");
+// const addListenersSearch = require("../addListenersSearch")
+// const addListenersTrackedMovies = require("../trackedMovies/addListenersTrackedMovies")
+// const addListenersCard = require("../addListenersCards");
+const getPopularMovies = require("../util/getPopularMovies")
 
 
 const observer = Object.create(null, {
@@ -27,6 +28,9 @@ const observer = Object.create(null, {
 
                     // show searchbar
                     $(".search").removeClass("hidden")
+
+                    // get current popular movies and display in dom
+                    getPopularMovies.fetch()
 
                     // get active users tracked movie list
                     trackedMoviesController.getUserMovieList(user.uid)

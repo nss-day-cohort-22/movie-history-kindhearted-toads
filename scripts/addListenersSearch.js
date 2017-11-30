@@ -4,6 +4,7 @@
 const dataManager = require("./util/dataManager")
 const renderer = require("./renderer/renderer")
 const movieFactory = require("./util/movieFactory")
+const getPopularMovies = require("./util/getPopularMovies")
 
 
 const addListenersSearch = function() {
@@ -18,9 +19,9 @@ const addListenersSearch = function() {
         
         // check if the button clicked was Find A Movie
         if (e.target.className.includes("nav__findMovie")) {
-            
             // format searchQuery to use as url String
             searchQuery = searchQuery.split(" ").join("+");
+            console.log("searchQuery:", searchQuery)
 
             // show the dom element that displays the Find A Movie API Search Results
             $(".movieResults").removeClass("hidden")
@@ -48,9 +49,13 @@ const addListenersSearch = function() {
                     }
                 })
                 
+                // empty search field
+                $("#searchField").val("")
+
             } else {
-                // write code to show the Top 3 or Top 5 movies
-                $(".movieResults__cardContainer").html("<h5>No matches found</h5>")
+                console.log("search field empty")
+                // write code to show the Top 6 movies 
+                getPopularMovies.displayCached()
             }
         }
 
@@ -60,7 +65,7 @@ const addListenersSearch = function() {
         
         // check if the button clicked was Search My Movies
         if (e.target.className.includes("nav__searchMyMovies")) {
-            console.log("searchQuery: ", searchQuery)
+            //console.log("searchQuery: ", searchQuery)
 
             // clear out any previous search results 
             $(".trackedMovies__cardContainer").html("")
@@ -75,6 +80,10 @@ const addListenersSearch = function() {
                     }
 
                 })
+
+                // empty search field
+                $("#searchField").val("")
+                
             } else {
                 // if nothing is in search input field and user clicks "Search My Movies", show ALL of their tracked movies
                 movieFactory.cache.forEach(movie => {

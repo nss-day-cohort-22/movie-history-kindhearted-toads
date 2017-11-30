@@ -130,10 +130,11 @@ const Renderer = Object.create(null, {
 
             // if it's on the watchlist add the watched class
             // othersise                
-            if (isWatchlist) {
+            if (isWatchlist && rating > 0) {
                 $cardContainer.addClass("watched");
-            } else {
+            } else if (isWatchlist) {
                 $cardContainer.addClass("unwatched");
+            } else {// unwatched untracked
                 chipDiv = "";
             }
                             

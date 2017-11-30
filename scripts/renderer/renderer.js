@@ -26,7 +26,8 @@ const Renderer = Object.create(null, {
             const existingAction = $(`#movieaction${movieId}`)
             // card goes from unwatched to watched
             const card = $(`#card${movieId}`);
-            card.removeClass("unwatched").addClass("watched");
+            card.removeClass("unwatched")
+            card.addClass("watched");
 
             const actionObj = {
                 "movieId": movieId, 
@@ -73,7 +74,7 @@ const Renderer = Object.create(null, {
             }
 
             if (obj.rating > 0 && obj.isWatchlist) {
-                actionDiv = `<div class="card-action" id="movieAction${obj.movieId}">
+                actionDiv = `<div class="card-action" id="movieaction${obj.movieId}">
                              <ul class="c-rating">
                                  ${this.getRatingLi(obj.rating)}
                              </ul>
@@ -114,6 +115,7 @@ const Renderer = Object.create(null, {
     "generateCard": {
         value: function (movie) {
 
+            
             let $cardContainer = $("<div>", {
                 "class": "col m4 card__wrapper",
                 "id": `card${movie.movieId}`
@@ -130,7 +132,7 @@ const Renderer = Object.create(null, {
             // delete chip for items that are 
             let chipDiv =   `<div class="chip">
                                 delete
-                                <i class="close material-icons card__delete-chip" id="chip|${movie.fbId}@${movie.movieId}">close</i>
+                                <i class="close material-icons card__delete-chip" id="chip|${movie.fbId}|${movie.movieId}">close</i>
                             </div>`;
 
             // if it's on the watchlist add the watched class
@@ -143,6 +145,7 @@ const Renderer = Object.create(null, {
                 
             } else {// unwatched untracked
                 chipDiv = "";
+                $cardContainer.attr("id", `cardut${movie.movieId}`)
             }
                             
             // Get the action div

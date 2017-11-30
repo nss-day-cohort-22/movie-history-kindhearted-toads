@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Movie History</title>
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -13,25 +14,26 @@
 </head>
 
 <body>
-    <nav class="nav">
+    <nav class="nav indigo">
 
         <span class="nav__userDisplay col s6"></span>
         <!-- <div class="nav__logo col s6">Movies History</div> -->
         <!-- Logout button will be hidden by default until user is logged in -->
         <div class="right col s6">
-            <button class="nav__logoutBtn hidden btn waves-effect waves-light white black-text">Logout</button>
+            <button class="nav__logoutBtn hidden btn waves-effect waves-red white black-text">Logout</button>
         </div>
     </nav>
-    <div class="siteContent container">
-        <div class="search row hidden">
-            <div class="search__input input-field col s7">
-                <input type="search" name="search" id="searchField" />
-                <label for="searchField">Search</label>
-            </div>
-            <div class="search__buttons col s5 valign-wrapper"></div>
-            <button class="nav__findMovie btn waves-effect waves-light">Find A Movie</button>
+    <div class="search row hidden">
+        <div class="search__input input-field col xl7 l10 m12">
+            <input type="search" name="search" id="searchField" />
+            <label for="searchField" class="indigo-text">Search</label>
+        </div>
+        <div class="search__buttons col xl5 l12 m12">
+            <button class="nav__findMovie btn waves-effect waves-light deep-orange">Find A Movie</button>
             <button class="nav__searchMyMovies btn waves-effect waves-light">Search My Movies</button>
         </div>
+    </div>
+    <div class="siteContent container">
         <header class="header">
             <h1 class="header__text center-align">Movie History</h1>
         </header>
@@ -42,7 +44,7 @@
             </header>
             <form class="login__form">
                 <div class="input-field">
-                    <input type="email" name="login__email" id="email" class="validate" />
+                    <input type="email" name="login__email" id="email" class="validate"/>
                     <label for="email">Email</label>
                 </div>
                 <div class="input-field">
@@ -50,7 +52,7 @@
                     <label for="password">Password</label>
                 </div>
             </form>
-            <button class="login__loginBtn btn waves-effect waves-light">Login</button>
+            <button class="login__loginBtn btn waves-effect waves-light indigo">Login</button>
             <button class="login__registerBtn btn waves-effect waves-light red">Register</button>
         </section>
         <!-- end of login page -->
@@ -68,8 +70,8 @@
         
         <section class="trackedMovies hidden center-align">
 
-            <button class="trackedMovies__unwatchedMovies btn waves-effect waves-light">Unwatched Movies</button>
-            <button class="trackedMovies__watchedMovies btn waves-effect waves-light">Watched Movies</button>
+            <button class="trackedMovies__unwatchedMovies btn waves-effect waves-light amber darken-2">Unwatched Movies</button>
+            <button class="trackedMovies__watchedMovies btn waves-effect waves-light indigo">Watched Movies</button>
             <section class="row">
                 <section class="cardContainer trackedMovies__cardContainer col s12">
 
@@ -79,8 +81,8 @@
         </section>       <!-- end of trackedMovies page -->
   
         <div id="rating__modal" class="modal">
-            <div class="modal-content">
-                <h1>RATE THIS MOVIE!</h>
+            <div class="modal-content ratingModal center-align">
+                <h3>RATE THIS MOVIE!</h3>
                     <ul class="movie-rating">
                         <li id="star_1" class='movie-rating__item'></li>
                         <li id="star_2" class='movie-rating__item'></li>

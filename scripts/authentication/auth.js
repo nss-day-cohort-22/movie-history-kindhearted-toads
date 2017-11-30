@@ -25,7 +25,7 @@ const auth = Object.create(null,{
             
             
             // add listener to the login/register buttons button
-            document.querySelector(".login").addEventListener("click", e => {
+            $(".login").on("click", e => {
                 
                 if (e.target.className.includes("login__loginBtn")) {
                     // Validate login information
@@ -52,7 +52,7 @@ const auth = Object.create(null,{
             })
             
             // add listener to the logout button
-            document.querySelector(".nav__logoutBtn").addEventListener("click", e => {
+            $(".nav__logoutBtn").on("click", e => {
                 this.logout()
 
                 // hide users tracked movies list

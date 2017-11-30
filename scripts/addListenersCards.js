@@ -47,17 +47,6 @@ addListenersCards = () => {
             }
         }
 
-        if (elClass.includes("movie-rating___item")) {
-            const rating = parseInt(targetId.split("movie-rating___item")[1]);
-            dataManager.firebasePUT({movidId: 1234, rating: rating}).then(r=> {
-                const userTable = movieFactory.cache;
-                return userTable
-            }).then(() => {
-                dataManager.getMovieById(movieId);
-            });
-        }
-
-
         if (elClass.includes("card__delete-chip")) {
             
             const movieIdParts = targetId.split("|")[1];

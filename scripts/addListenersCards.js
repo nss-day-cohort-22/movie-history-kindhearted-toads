@@ -37,9 +37,7 @@ addListenersCards = () => {
             const movieId = parseInt(targetId.split("-")[1]);
             const actorsEl = $(`#movie__actors-${movieId}`);
 
-            if (actorsEl.children().length > 0) {
-                console.log("already has an actor set");
-            } else {
+            if (!actorsEl.children().length > 0) {
                 let cast = [];
                 getCast.fetch(movieId).then(result => {
                     cast = $(renderer.getActors(result));
@@ -49,16 +47,12 @@ addListenersCards = () => {
             }
         }
 
-        if (elClass.includes("card__watched")) {
-
-        }
-
         if (elClass.includes("movie-rating___item")) {
             const rating = parseInt(targetId.split("movie-rating___item")[1]);
             dataManager.firebasePUT({movidId: 1234, rating: rating}).then(r=> {
                 const userTable = movieFactory.cache;
                 return userTable
-            }).then(result => {
+            }).then(() => {
                 dataManager.getMovieById(movieId);
             });
         }
@@ -76,7 +70,6 @@ addListenersCards = () => {
                 movieFactory.removeFromCache(movieId);
             })
 
-        // remove element from the display
         }
     
     

@@ -24,8 +24,12 @@ const Renderer = Object.create(null, {
             // Update the existing movie card to reflect that
             // the movie is now watched and has a rating
             const existingAction = $(`#movieaction${movieId}`)
+            // card goes from unwatched to watched
+            const card = $(`#card${movieId}`);
+            card.removeClass("unwatched")
+            card.addClass("watched");
 
-            actionObj = {
+            const actionObj = {
                 "movieId": movieId, 
                 "rating": rating, 
                 "isWatchlist": true, 
@@ -70,7 +74,7 @@ const Renderer = Object.create(null, {
             }
 
             if (obj.rating > 0 && obj.isWatchlist) {
-                actionDiv = `<div class="card-action" id="movieAction${obj.movieId}">
+                actionDiv = `<div class="card-action" id="movieaction${obj.movieId}">
                              <ul class="c-rating">
                                  ${this.getRatingLi(obj.rating)}
                              </ul>
@@ -111,6 +115,7 @@ const Renderer = Object.create(null, {
     "generateCard": {
         value: function (movie) {
 
+            
             let $cardContainer = $("<div>", {
                 "class": "col m4 card__wrapper",
                 "id": `card${movie.movieId}`
@@ -127,7 +132,7 @@ const Renderer = Object.create(null, {
             // delete chip for items that are 
             let chipDiv =   `<div class="chip">
                                 delete
-                                <i class="close material-icons card__delete-chip" id="chip|${movie.fbId}@${movie.movieId}">close</i>
+                                <i class="close material-icons card__delete-chip" id="chip|${movie.fbId}|${movie.movieId}">close</i>
                             </div>`;
 
             // if it's on the watchlist add the watched class
@@ -137,18 +142,20 @@ const Renderer = Object.create(null, {
                 $cardContainer.addClass("watched");
             } else if (isWatchlist) {
                 $cardContainer.addClass("unwatched");
+                
             } else {// unwatched untracked
                 chipDiv = "";
+                $cardContainer.attr("id", `cardut${movie.movieId}`)
             }
                             
             // Get the action div
-            actionObj = {
+            const actionObj = {
                 movieId: movie.movieId, 
                 rating: rating, 
                 isWatchlist: isWatchlist, 
                 fbId: movie.fbId
             }
-            actionDiv = this.getActions(actionObj);
+            const actionDiv = this.getActions(actionObj);
 
             // capture only the first 300 words
             const overview = movie.overview.length > 300 ? movie.overview.substring(0,300) + "..." : movie.overview;
@@ -158,7 +165,7 @@ const Renderer = Object.create(null, {
             if (movie.imgPath !== null) {
                 posterPath = `http://image.tmdb.org/t/p/w342${movie.imgPath}`;
             } else {
-                // error handling
+                posterPath = "https://dummyimage.com/220x331&text=No+Image+Available"
             }
             
             // put the pieces together
@@ -169,12 +176,12 @@ const Renderer = Object.create(null, {
                     </div>
                     <div class="card-content">
                         <span class="movie__title card-title activator grey-text text-darken-4">${movie.movieName}<i class="material-icons right"  id="additionalDetails-${movie.movieId}">more_vert</i></span>
-                    <p>${movie.releaseDate}</p>
-                    </div>
+                        </div>
                         ${actionDiv}
                         ${chipDiv}
                     <div class="card-reveal">
                         <span class="card-title grey-text text-darken-4">${movie.movieName}<i class="material-icons right">close</i></span>
+                        <p>${movie.releaseDate}</p>
                         <p class="movie__overview">${overview}</p>
                         <h6>Cast:</h6>
                         <ul class="movie__actors" id="movie__actors-${movie.movieId}">${actors}</ul>

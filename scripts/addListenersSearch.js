@@ -4,6 +4,7 @@
 const dataManager = require("./util/dataManager")
 const renderer = require("./renderer/renderer")
 const movieFactory = require("./util/movieFactory")
+const getPopularMovies = require("./util/getPopularMovies")
 
 
 const addListenersSearch = function() {
@@ -15,10 +16,8 @@ const addListenersSearch = function() {
         // get value from search field
         let searchQuery = $("#searchField").val()
         
-        
         // check if the button clicked was Find A Movie
         if (e.target.className.includes("nav__findMovie")) {
-            
             // format searchQuery to use as url String
             searchQuery = searchQuery.split(" ").join("+");
 
@@ -30,7 +29,6 @@ const addListenersSearch = function() {
 
             
             if (searchQuery) {
-
                 // clear out any previous search results 
                 $(".movieResults__cardContainer").html("")
 
@@ -48,9 +46,12 @@ const addListenersSearch = function() {
                     }
                 })
                 
+                // empty search field
+                $("#searchField").val("")
+
             } else {
-                // write code to show the Top 3 or Top 5 movies
-                $(".movieResults__cardContainer").html("<h5>No matches found</h5>")
+                // Display the popular movies again, from cache 
+                getPopularMovies.displayCached()
             }
         }
 
@@ -60,13 +61,11 @@ const addListenersSearch = function() {
         
         // check if the button clicked was Search My Movies
         if (e.target.className.includes("nav__searchMyMovies")) {
-            console.log("searchQuery: ", searchQuery)
 
             // clear out any previous search results 
             $(".trackedMovies__cardContainer").html("")
             
             if (searchQuery) {
-
                 // search user's tracked movies to check if a movie matched the title the user put in search field
                 movieFactory.cache.forEach(movie => {
                     
@@ -75,6 +74,10 @@ const addListenersSearch = function() {
                     }
 
                 })
+
+                // empty search field
+                $("#searchField").val("")
+
             } else {
                 // if nothing is in search input field and user clicks "Search My Movies", show ALL of their tracked movies
                 movieFactory.cache.forEach(movie => {
@@ -87,10 +90,9 @@ const addListenersSearch = function() {
                 $(".trackedMovies__cardContainer").html("<h5>No matches found</h5>")
             }
 
-            // make sure all tracked movies are displayed and none of the cards have the "hidden" class
-            /* -- psuedo code, may work, may not -- */
-            // $("watched").removeClass("hidden")   
-            // $("unwatched").removeClass("hidden")
+            // make sure all tracked movies are displayed and none of the cards have the "hidden" class 
+            $("watched").removeClass("hidden")   
+            $("unwatched").removeClass("hidden")
             
             // hide the dom element that displays the Find A Movie API Search Results
             $(".movieResults").addClass("hidden")

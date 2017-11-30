@@ -9,7 +9,7 @@ const firebase = require("firebase")
 // });
 
 const dataManager = Object.create(null, {
-    "userUID": {"value": null, "writable": true, "enumberable": true},
+    "userUID": {"value": null, "writable": true, "enumerable": true},
 
     "setUID": {"value": function(uid){this.userUID = uid}, "writable": true, "enumerable": true},
     
@@ -55,7 +55,7 @@ const dataManager = Object.create(null, {
             return firebase.auth().currentUser.getIdToken(true)
                 .then(idToken => {
                     return $.ajax({
-                        "url": `https://movie-history-59344.firebaseio.com/${this.userUID}/${fbID}/.json?auth=${idToken}`,
+                        "url": `https://movie-history-59344.firebaseio.com/${firebase.auth().currentUser.uid}/${fbID}/.json?auth=${idToken}`,
                         "method": "PUT",
                         "data": JSON.stringify(object)
                     })

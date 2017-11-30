@@ -28,6 +28,11 @@ const auth = Object.create(null,{
             $(".login").on("click", e => {
                 
                 if (e.target.className.includes("login__loginBtn")) {
+
+                    // if (!document.querySelector("[name='login__password']").value) {
+                    //     Materialize.toast("please enter a password and try again", 4000)
+                    // }
+
                     // Validate login information
                     this.validate(
                         document.querySelector("[name='login__email']").value,
@@ -84,7 +89,7 @@ const auth = Object.create(null,{
                 var errorCode = error.code;
                 var errorMessage = error.message;
                 // ...
-                console.log("error creating account", errorCode, errorMessage)
+                Materialize.toast(erroCode + errorMessage, 3000)
             });
         }
     },
@@ -97,7 +102,7 @@ const auth = Object.create(null,{
                     const errorCode = error.code
                     const errorMessage = error.message
 
-                    console.log("Email or password is invalid", errorCode, errorMessage)
+                    Materialize.toast(errorCode + errorMessage, 3000)
                 })
         }
     },
@@ -105,10 +110,10 @@ const auth = Object.create(null,{
         value: function () {
             firebase.auth().signOut().then(function() {
                 // Sign-out successful.
-                console.log("user has signed out")
+                Materialize.toast("Goodbye!", 3000)
             }).catch(function(error) {
                 // An error happened.
-                console.log("error signing out")
+                Materialize.toast("There was an error signing out", 3000)
             });
         }
     }

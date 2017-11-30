@@ -52,11 +52,11 @@ const Renderer = Object.create(null, {
     },
     "getActions": {
         value: function(obj) {
-   
+
             let actionDiv = "";
             // make sure the object is completely populated
             if (!obj.hasOwnProperty("rating") 
-                || !obj.hasOwnProperty("isWatchList")
+                || !obj.hasOwnProperty("isWatchlist")
                 || !obj.hasOwnProperty("movieId")) {
                 return actionDiv;
             }
@@ -64,12 +64,11 @@ const Renderer = Object.create(null, {
             if (obj.rating > 0 && obj.isWatchlist) {
                 actionDiv = `<div class="card-action" id="movieAction|${obj.movieId}">
                              <ul class="c-rating">
-                                 ${this.getRatingLi(rating)}
+                                 ${this.getRatingLi(obj.rating)}
                              </ul>
                          </div>`;
                     
             } else if (obj.isWatchlist) {
-                $cardContainer.addClass("unwatched");
                 actionDiv = `<div class="card-action" id="movieaction|${obj.movieId}">
                          <a href="#rating__modal" class="card__watched modal-trigger" id="watched|${obj.movieId}">Watched?</a>
                          </div>`;

@@ -51,6 +51,8 @@ addListenersCards = () => {
 
         if (elClass.includes("card__watched")) {
             // Krys's code for testing
+            const movieId = parseInt(targetId.split("|")[1]);
+            renderer.trackedToWatched(movieId, 5);
             //
         }
 

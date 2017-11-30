@@ -59,7 +59,17 @@
   background-repeat: no-repeat;
 }
 
-.movie-rating__item1, .movie-rating__item2, .movie-rating__item3, .movie-rating__item4, .movie-rating__item5 {
+.movie-rating {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.movie-rating__item {
   -webkit-box-flex: 0;
   -webkit-flex: 0 0 24px;
       -ms-flex: 0 0 24px;
@@ -67,6 +77,17 @@
   height: 24px;
   background: url("../images/stars.svg");
   background-position: 0 0;
+  background-repeat: no-repeat;
+}
+
+.movie-rating__item--hover, .movie-rating__item--starred {
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 24px;
+      -ms-flex: 0 0 24px;
+          flex: 0 0 24px;
+  height: 24px;
+  background: url("../images/stars.svg");
+  background-position: -24px 0;
   background-repeat: no-repeat;
 }
 
@@ -81,4 +102,8 @@
 
 .card__add-to-watchlist:hover {
   cursor: pointer !important;
+}
+
+.r-flex {
+  display: flex;
 }

@@ -3,6 +3,15 @@ module.exports = function foo(grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON("package.json"),
         watch: {
+            options: {
+                livereload: true
+            },
+            styles: {
+                files: ["styles/**/*.css"]
+            },
+            html: {
+                files: ["index.html"]
+            },
             scripts: {
                 files: ["**/scripts/*.js", "**/scripts/**/*.js", "!node_modules/**/*.js"],
                 tasks: ["eslint", "browserify", "notify_hooks"],

@@ -20,12 +20,24 @@ const Renderer = Object.create(null, {
         enumerable: true
     },
 
+    "getActors": {
+        value: function(actors) {
+            let listOfActors = "";
+            if (actors) {
+                actors.forEach(a=> {
+                    listOfActors += `<li>${a}</li>`;
+                });
+            }
+            return listOfActors;
+        },
+        enumerable: true
+    },
     // this function actually generates a new card
     "generateCard": {
         value: function (movie, el) {
-            
+
             let $cardContainer = $("<div>", {
-                "class": "col m4 card__wrapper hoverable",
+                "class": "col m4 card__wrapper",
                 "id": `card${movie.movieId}`
             });
     
@@ -35,7 +47,7 @@ const Renderer = Object.create(null, {
             // build the list for the ratings
             let ratingString = "";
             
-            if (rating) {
+            if (rating > 0) {
                 for (let i = 0; i < 5; i++) {
                     if (i < rating) {
                         ratingString += "<li class='c-rating__item--starred'></li>";
@@ -45,24 +57,30 @@ const Renderer = Object.create(null, {
                 }
             }
             
+            const isWatchlist = movie.fbId !== null && movie.rating !== null;
+
+            let actors = this.getActors(movie.actorsArray);
+
 
             let chipDiv =   `<div class="chip">
                                 delete
-                                <i class="close material-icons card__delete-chip" id="chip|${movie.movieId}">close</i>
+                                <i class="close material-icons card__delete-chip" id="chip|${movie.fbId}@${movie.movieId}">close</i>
                             </div>`;
 
             let actionDiv = "";
 
-            if (movie.rating) {
+            if (movie.rating > 0 && isWatchlist) {
+                $cardContainer.addClass("watched");
                 actionDiv = `<div class="card-action" id="movieAction|${movie.movieId}">
                              <ul class="c-rating">
                                  ${ratingString}
                              </ul>
                          </div>`;
                     
-            } else if (movie.fbId) {
+            } else if (isWatchlist) {
+                $cardContainer.addClass("unwatched");
                 actionDiv = `<div class="card-action" id="movieaction|${movie.movieId}">
-                         <a class="card__watched" id="watched|${movie.movieId}">Watched?</a>
+                         <a id="watched|${movie.movieId}" class="card__watched waves-effect waves-light btn modal-trigger" href="#rating__modal">Watched?</a>
                          </div>`;
                     
             } else {
@@ -79,7 +97,7 @@ const Renderer = Object.create(null, {
             
             // put the pieces together
             $cardContainer.html(
-                `<div class="card sticky-action">
+                `<div class="card sticky-action hoverable">
                     <div class="card-image">
                     <img class="activiator" src="${posterPath}">
                     </div>
@@ -90,36 +108,20 @@ const Renderer = Object.create(null, {
                         ${actionDiv}
                         ${chipDiv}
                     <div class="card-reveal">
-                        <span class="card-title grey-text text-darken-4">${movie.movieName}<i class="material-icons right">close</i></span>
+                        <span class="card-title grey-text text-darken-4">${movie.movieName}<i class="material-icons right" id="additionalDetails|${movie.movieId}">close</i></span>
                         <p class="movie__overview">${overview}</p>
+                        <ul class="movie__actors" id="movie__actors|${movie.movieId}">${actors}</ul>
                     </div>
                 </div>
                 `);
 
             // Add Event Listeners to the Card
 
-            return this.AddEventListener($cardContainer);
+            return $cardContainer;
 
         },
         enumerable: true
     },
-    "AddEventListener": {
-        value: function(card) {
-            // card.on("click", function(e) {
-            //     const el = e.target;
-
-            //     if (el.className.includes("card__delete-chip")) {
-            //         const targetId = el.id;
-            //         const movieId = parseInt(targetId.split('|')[1]);
-            //         $(`.card${movieId}`).hide();
-            //     }
-
-            // });
-            return card;
-        },
-        enumerable: true
-    }
-
 });
 
 module.exports = Renderer;

@@ -8,16 +8,17 @@ auth.init()
 
 $(document).ready(function () {
     $(".modal").modal({
+        dismissable: true,
         complete: function() {
             $(".movie-rating__item").removeClass("movie-rating__item--starred")
             let targetId = $(".rated").attr("id")
             const rating = parseInt(targetId.split("_")[1]);
-            dataManager.firebasePUT({movidId: parseInt($("#rating__modal").attr("data-movieId")), rating: rating}).then(r=> {
-                const userTable = movieFactory.cache;
+            const stuff = [parseInt($("#rating__modal").attr("data-firebaseId")), parseInt($("#rating__modal").attr("data-movieId"))]
+            debugger
+            dataManager.firebasePUT(parseInt($("#rating__modal").attr("data-firebaseId")),{movidId: parseInt($("#rating__modal").attr("data-movieId")), rating: rating}).then(r=> {
+                movieFactory.cache;
                 return userTable
-            }).then(result => {
-                dataManager.getMovieById(movieId);
-            });
+            })
         }
     });
 });

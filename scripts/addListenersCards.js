@@ -33,9 +33,11 @@ addListenersCards = () => {
         }
 
         if (elClass.includes("card__watched")) {
-            const movieId = parseInt(targetId.split("|")[1]);
+            const idData = targetId.split("|");
             console.log("card__watched - launch modal");
-            $("#rating__modal").attr("data-movieId", movieId)
+            $("#rating__modal").attr("data-movieId", idData[1])
+            $("#rating__modal").attr("data-firebaseId", idData[2])
+            debugger
         }
 
         if (elClass.includes("movie-rating___item")) {

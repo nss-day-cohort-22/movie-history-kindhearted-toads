@@ -19,7 +19,6 @@ $(document).ready(function () {
             let targetId = $(".rated").attr("id")
             const rating = parseInt(targetId.split("_")[1]);
             const stuff = [parseInt($("#rating__modal").attr("data-firebaseId")), parseInt($("#rating__modal").attr("data-movieId"))]
-            debugger
             dataManager.firebasePUT(parseInt($("#rating__modal").attr("data-firebaseId")),{movidId: parseInt($("#rating__modal").attr("data-movieId")), rating: rating}).then(r=> {
                 movieFactory.cache;
                 return userTable

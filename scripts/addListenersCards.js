@@ -52,7 +52,6 @@ addListenersCards = () => {
             console.log("card__watched - launch modal");
             $("#rating__modal").attr("data-movieId", idData[1])
             $("#rating__modal").attr("data-firebaseId", idData[2])
-            debugger
         }
 
 

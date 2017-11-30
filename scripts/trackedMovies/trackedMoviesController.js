@@ -25,10 +25,22 @@ const trackedMoviesController = Object.create(null, {
     },
     "getMovieDetails": {
         value: function (userMovieListArray) {
-            userMovieListArray.forEach( movie => {
-                dataManager.getMovieById(movie.movieId).then(returnedMovieData =>{
-                    renderer.append(movieFactory.build(returnedMovieData, movie), "trackedMovies__cardContainer")
-                })
+            
+            let container = []
+            
+            while (userMovieListArray.length > 0){
+                container.push(userMovieListArray.splice(0, 18))
+            }
+            
+            container.forEach( (block, index) => {
+                let time = index*11000
+                setTimeout(() => {
+                    block.forEach( movie => {
+                        dataManager.getMovieById(movie.movieId).then(returnedMovieData => {
+                            renderer.append(movieFactory.build(returnedMovieData, movie), "trackedMovies__cardContainer")
+                        })
+                    })
+                }, time)
             })
         }
     }

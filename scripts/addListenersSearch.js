@@ -14,10 +14,13 @@ const addListenersSearch = function() {
         
         // get value from search field
         let searchQuery = $("#searchField").val()
-        searchQuery = searchQuery.split(" ").join("+");
+        
         
         // check if the button clicked was Find A Movie
         if (e.target.className.includes("nav__findMovie")) {
+            
+            // format searchQuery to use as url String
+            searchQuery = searchQuery.split(" ").join("+");
 
             // show the dom element that displays the Find A Movie API Search Results
             $(".movieResults").removeClass("hidden")
@@ -57,7 +60,8 @@ const addListenersSearch = function() {
         
         // check if the button clicked was Search My Movies
         if (e.target.className.includes("nav__searchMyMovies")) {
-            
+            console.log("searchQuery: ", searchQuery)
+
             // clear out any previous search results 
             $(".trackedMovies__cardContainer").html("")
             

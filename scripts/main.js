@@ -10,6 +10,7 @@ auth.init()
 
 const dataManager = require("./util/datamanager.js")
 const renderer = require("./renderer/renderer.js")
+const movieFactory = require("./util/movieFactory.js")
 
 $(".modal").modal({
     dismissable: true,
@@ -20,6 +21,7 @@ $(".modal").modal({
             const rating = parseInt(targetId.split("_")[1]);
             $(".rated").removeClass("rated")
             dataManager.firebasePUT($("#rating__modal").attr("data-firebaseId"), { movieId: parseInt($("#rating__modal").attr("data-movieId")), rating: rating }).then(r => { })
+            movieFactory.cache.find(x => x.movieId === parseInt($("#rating__modal").attr("data-movieId"))).rating = rating
             renderer.trackedToWatched(parseInt($("#rating__modal").attr("data-movieId")), $("#rating__modal").attr("data-firebaseId"), rating)
         }
     }

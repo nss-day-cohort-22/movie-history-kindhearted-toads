@@ -61,7 +61,7 @@ addListenersCards = () => {
             const movieIdParts = targetId.split("|")[1];
             const fbId = movieIdParts.split("@")[0];
             const movieId = parseInt(movieIdParts.split("@")[1]);
-            $(`#card${movieId}`).hide();
+            $(`#card${movieId}`).remove();
 
             dataManager.firebaseDELETE(fbId).then(() => {
                 movieFactory.removeFromCache(movieId);

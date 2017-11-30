@@ -14,17 +14,23 @@ const Renderer = Object.create(null, {
     },
     
     "trackedToWatched": {
+        /**
+         *  // code for testing
+            const movieId = parseInt(targetId.split("|")[1]);
+            renderer.trackedToWatched(movieId, 4);
+ 
+         */
         value: function (movieId, rating) {
-            // update object
-            const existingCard = $(`#card${movie.movieId}`);
-            const existingAction = $(`#id="movieaction|${obj.movieId}`)
+            // Update the existing movie card to reflect that
+            // the movie is now watched and has a rating
+            const existingAction = $(`#movieaction${movieId}`)
 
             actionObj = {
                 "movieId": movieId, 
                 "rating": rating, 
                 "isWatchlist": true, 
             }
-            const newAction = $(this.getAction(actionObj));
+            const newAction = $(this.getActions(actionObj));
             // replace existing
             existingAction.replaceWith(newAction);
         },
@@ -62,14 +68,14 @@ const Renderer = Object.create(null, {
             }
 
             if (obj.rating > 0 && obj.isWatchlist) {
-                actionDiv = `<div class="card-action" id="movieAction|${obj.movieId}">
+                actionDiv = `<div class="card-action" id="movieAction${obj.movieId}">
                              <ul class="c-rating">
                                  ${this.getRatingLi(obj.rating)}
                              </ul>
                          </div>`;
                     
             } else if (obj.isWatchlist) {
-                actionDiv = `<div class="card-action" id="movieaction|${obj.movieId}">
+                actionDiv = `<div class="card-action" id="movieaction${obj.movieId}">
                          <a href="#rating__modal" class="card__watched modal-trigger" id="watched|${obj.movieId}">Watched?</a>
                          </div>`;
                     
@@ -84,6 +90,9 @@ const Renderer = Object.create(null, {
     },
 
     "getActors": {
+        /**
+         * This function returns the list of actors
+         */
         value: function(actors) {
             let listOfActors = "";
             if (actors) {
@@ -95,6 +104,7 @@ const Renderer = Object.create(null, {
         },
         enumerable: true
     },
+    
     // this function actually generates a new card
     "generateCard": {
         value: function (movie) {

@@ -129,7 +129,8 @@ const Renderer = Object.create(null, {
                             </div>`;
 
             // if it's on the watchlist add the watched class
-            // othersise                
+            // otherwise if it is just watchlisted add unwatched
+            // otherwise this is just an unwatched un-watchlisted movie             
             if (isWatchlist && rating > 0) {
                 $cardContainer.addClass("watched");
             } else if (isWatchlist) {

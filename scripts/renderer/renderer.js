@@ -26,7 +26,8 @@ const Renderer = Object.create(null, {
             const existingAction = $(`#movieaction${movieId}`)
             // card goes from unwatched to watched
             const card = $(`#card${movieId}`);
-            card.removeClass("unwatched").addClass("watched");
+            card.removeClass("unwatched")
+            card.addClass("watched");
 
             const actionObj = {
                 "movieId": movieId, 

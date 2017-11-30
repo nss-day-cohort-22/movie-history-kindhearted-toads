@@ -29,6 +29,9 @@ const observer = Object.create(null, {
                     // show searchbar
                     $(".search").removeClass("hidden")
 
+                    // make sure movie results container is being displayed. (it hides when user logs out)
+                    $(".movieResults").removeClass("hidden")
+
                     // get current popular movies and display in dom
                     getPopularMovies.fetch()
 

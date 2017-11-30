@@ -1,6 +1,5 @@
 const auth = require("./authentication/auth")
 const $ = require("jquery")
-const dataManager = require("./util/datamanager.js")
 require("materialize")
 
 const addListenersSearch = require("./addListenersSearch")
@@ -9,22 +8,23 @@ const addListenersCard = require("./addListenersCards");
 
 auth.init()
 
+const dataManager = require("./util/datamanager.js")
+const renderer = require("./renderer/renderer.js")
 
-
-$(document).ready(function () {
-    $(".modal").modal({
-        dismissable: true,
-        complete: function() {
-            $(".movie-rating__item").removeClass("movie-rating__item--starred")
-            let targetId = $(".rated").attr("id")
+$(".modal").modal({
+    dismissable: true,
+    complete: function () {
+        $(".movie-rating__item").removeClass("movie-rating__item--starred")
+        let targetId = $(".rated").attr("id")
+        if (targetId) {
             const rating = parseInt(targetId.split("_")[1]);
-            const stuff = [parseInt($("#rating__modal").attr("data-firebaseId")), parseInt($("#rating__modal").attr("data-movieId"))]
-            dataManager.firebasePUT(parseInt($("#rating__modal").attr("data-firebaseId")),{movidId: parseInt($("#rating__modal").attr("data-movieId")), rating: rating}).then(r=> {
-                movieFactory.cache;
-                return userTable
-            })
+            $(".rated").removeClass("rated")
+            dataManager.firebasePUT($("#rating__modal").attr("data-firebaseId"), { movieId: parseInt($("#rating__modal").attr("data-movieId")), rating: rating }).then(r => { })
+    
+            renderer.trackedToWatched(parseInt($("#rating__modal").attr("data-movieId")), $("#rating__modal").attr("data-firebaseId"), rating)
+            dataManager.firebasePUT(parseInt($("#rating__modal").attr("data-firebaseId")),{movidId: parseInt($("#rating__modal").attr("data-movieId")), rating: rating}).then(r=> {})
         }
-    });
+    }
 });
 
 $(".movie-rating__item") //highlight stars on hover
@@ -54,8 +54,6 @@ $(".movie-rating__item").on("click", e => {
     }
     $(e.target).addClass("rated")
 })
-
 addListenersSearch()
 addListenersTrackedMovies()
 addListenersCard()
-

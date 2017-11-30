@@ -10,18 +10,18 @@ const addListenersCard = require("../addListenersCards");
 const observer = Object.create(null, {
     "init": {
         value: function (auth) {
-            firebase.auth().onAuthStateChanged(function(user) {
-               
+            firebase.auth().onAuthStateChanged(function (user) {
+
                 if (user) {
                     // store the current user info to auth object
                     auth.activeUser = user
-                     
+
                     // populate the navbar welcome message with active user
                     document.querySelector(".nav__userDisplay").innerHTML = `Welcome ${user.email}!`
 
                     // show logout button
                     $(".nav__logoutBtn").removeClass("hidden")
-                    
+
                     // hide login form
                     $(".login").addClass("hidden")
 
@@ -31,7 +31,7 @@ const observer = Object.create(null, {
                     // get active users tracked movie list
                     trackedMoviesController.getUserMovieList(user.uid)
 
-                   
+
                 } else {
                     // clear out welcome message in navbar
                     document.querySelector(".nav__userDisplay").innerHTML = ""
@@ -40,7 +40,7 @@ const observer = Object.create(null, {
                     $(".nav__logoutBtn").addClass("hidden")
                     // hide searchbar
                     $(".search").addClass("hidden")
-                    
+
 
                     // clear out the active user info on the auth object
                     auth.activeUser = null

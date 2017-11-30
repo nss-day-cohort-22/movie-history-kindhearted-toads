@@ -9,7 +9,7 @@ const movieFactory = require("./util/movieFactory")
 const addListenersSearch = function() {
 
     // add listener to the search area in nav bar 
-    document.querySelector(".search").addEventListener("click", e => {
+    $(".search").on("click", e => {
 
         
         // get value from search field

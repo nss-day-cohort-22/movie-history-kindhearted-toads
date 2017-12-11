@@ -29,11 +29,11 @@ const trackedMoviesController = Object.create(null, {
             let container = []
             
             while (userMovieListArray.length > 0){
-                container.push(userMovieListArray.splice(0, 18))
+                container.push(userMovieListArray.splice(0, 3))
             }
             
             container.forEach( (block, index) => {
-                let time = index*11000
+                let time = index*2000
                 setTimeout(() => {
                     block.forEach( movie => {
                         dataManager.getMovieById(movie.movieId).then(returnedMovieData => {
